@@ -1,0 +1,78 @@
+▶ GIT
+1. 버젼관리 시스템
+2.
+
+====================================
+	github[]원격 저장소
+====================================
+
+push ↑↓pull         push ↑↓pull
+조율비 개발자        조율비 개발자
+  []로컬저장소          []로컬저장소
+
+* 저장소 (Repository)
+ 1) 로컬저장소 - 내 pc에서 개인 전용저장소
+ 2) 원격저장소 - 여러사람이 공유저장소 / 원격 서버에서 관리
+* commit - 변경사항을 기록작업 ( 메시지 )
+* push : ↑ / pull : ↓
+
+3. 실습 (1)
+1) github 회원가입
+2) source tree 다운로드 
+
+4. 실습 (2) git 다운로드
+1) https://git-scm.com/
+2) 설치
+
+5. 실습 (3) git 
+1) user이름 
+   git config --global user.name "yulbi Jo"
+2) 가입한 이메일 
+   git config --global user.name "urby0725@naver.com"
+3) 설정확인
+   git config --list
+
+6. 실습 (4) 로컬저장소 (local 저장소)   .....   명령어 확인
+1) 폴더 만들기 공백x, 한글x ex) git_test
+2) 초기화 - step1)
+   git init
+3) 작업 후 파일올리기 - step2)
+   git add .              -- git add   추가할 파일
+   git status             -- git status 추가할 파일 확인
+4) 기록남기기 - step3)
+   git commit -m "하고 싶은 말"
+   ex) git commit -m "first"
+5) remote ( 원격저장소와 연결 )
+   git remote add origin "원격저장소 주소"
+
+   > github - repository
+
+6) 원격저장소 연결확인
+   git remote -v
+7) 원격저장소 올리기
+    git push origin master
+
+7. 실습 (5) 로컬저장소 (local 저장소)   .....   소스트리
+Clone
+    소스경로 : https://github.com/joyulbi/java_2025.git 본인주소
+    목적지경로 : 작업공간 
+    작업이름 : java_2025
+    Local Floder : [루트]
+
+    [clone]
+
+8. 실습 (6) push
+1) [ eclipse ] 코드작성 or 수정
+2) [소스트리] 스테이지에 올라가지 않은 파일 [ 모두 스테이지에 올리기 ] [ 선택 내용 스테이지에 올리기 ] git add.
+3) [commit] commit 메시지 - [커밋]
+4) push 버튼    .... git push origin master
+
+
+
+
+
+
+
+
+
+

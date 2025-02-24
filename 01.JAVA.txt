@@ -1,0 +1,262 @@
+● 1. java?
+1) java? 
+- 프로그래밍 언어
+- 사람이 작성한 코드를 컴퓨터가 이해할 수 있는 명령을 작성하는 도구
+- 정부나 기업의 si (시스템 통합 프로젝트)가 대부분 자바로 구현
+- jvm (java virtual machine)
+ 운영체제와 하드웨어에 관계없이 실행
+- OOP  
+
+● 2. OOP 특징
+- object oriented programming
+- 부품객체(class)를 조립해서 만들어가는 프로그래밍 기법
+
+part1) control ★
+   - 변수 / 자료형 / 제어문 ( if/switch/for, while, do while) / array / method
+part1) oop 특징 ★ 면접문제 많이나옴
+   - class / static, final, modifier / 상속 / abstract, interface / 예외처리
+part3) oop 활용
+   - collection ( ArrayList ), Thread, lambda + Stream / io / network
+
+
+● 3. 설치 (1) java
+1) java.sun.com 다운로드 받아서 설치
+   - JDK 17.0.14
+   - jdk-17.0.14_windows-x64_bin.exe
+
+2) java path 설정
+   - JAVA_HOME : C:\Program Files\Java\jdk-17
+   - path           : %JAVA_HOME%\bin
+
+> [내 컴퓨터] - 오른쪽마우스 - 속성 - [고급시스템설정]-[고급]-[환경변수]
+> 시스템 변수 - [새로만들기]
+
+3) java 설치 확인
+[검색] cmd
+-------------------------------------
+java -version
+-------------------------------------
+
+● 4. 설치 (2) eclipse
+1) eclipse.org - 다운롤드 - java EE
+2) 작업환경 (workspace) - D:\java_2025
+* [window] - [preferences] - [perspective] - [검색 : enc]
+
+
+● 5. 프로그램 작성 ( 프로그램 동작 )
+1) 소스파일(개발자) - 컴파일(번역) - 바이트코드(컴퓨터)
+   .java                                     .class
+ 
+A001.java    -- javac A001.java --     A001.class
+
+
+* 자바프로젝트 :  File - new - java project
+       ▶ 프로젝트 이름 / ▶JRE - JavaSE-17
+
+* 패키지 : 프로젝트 - src - 오른쪽 마우스 - new - package - com.회사명.프로젝트명.작업단위
+  ex) com.company.java001
+
+* 자바파일(부품객체) : 패키지 - 오른쪽 마우스 - new - class
+   - 클래스명 대문자
+
+
+
+
+ctrl + (화면크게) / ctrl - (화면작게)
+한줄 : ctrl + alt + j
+
+---------------------------------------------
+package com.company.java001;
+
+public class A001 {
+	public static void main(String [] args) {
+		System.out.println("Hello");
+	} // end main
+} // end class
+
+
+// 한줄 주석(설명글)
+/* ctrl + (화면크게) / ctrl - (화면작게)
+ 
+3번째줄 : public class A001{
+	public 아무데서나 접근가능 / class 부품객체 / A001 클래스이름
+4번째줄 : jvm 구동시작점
+	public static void main(String [] args){}
+	public 아무데서나 접근가능 / static 메모리상 사용 가능 / void main(String[] args) 전원버튼 이름
+5번째줄 : System.out.println("Hello");
+	System(운영체제) out(cmd) println(출력)
+	
+ctrl + f11 실행
+*/
+----------------------------------------------
+
+● 6. git연결
+1) 폴더 만들기 - D:\java_2025
+2) source tree
+
+
+
+
+...집에 컴퓨터 > java,eclipse,git,sourcetree - 설치 (이번주까지 ~25.02.21) 
+
+
+● 7.출력 (1) println, print, printf
+1) System.out.println("문자열-하고 싶은 말");
+    //\n 줄바꿈
+   
+2) System.out.print("문자열-하고 싶은 말"); //줄바꿈 처리 안됨
+3) System.out.printf("내나이%d,내이름은%s,좋아하는 숫자 파이 %.2f",70,"조율비",2.5);
+   %d 숫자정수 : 10,20,30
+   %s 문자열 : "abc"
+   %f 숫자실수 : 2.5
+
+   System.out.println("A");
+   System.out.println("AB");
+   System.out.println("ABC");
+    
+   System.out.println("A\nAB\nABC");
+
+
+● 7.출력 (2) + 의미,()
+System.out.println( 1 + 2 ); //3
+System.out.println( 1 + 2 + " + " + 3 + 4 ); // 3 + 34
+System.out.println( "" + 1 + 2 ); //12
+
+1)       + 연산
+2) 숫자 + 숫자   --> 더하기 연산  
+3) 숫자 + 문자열, 문자열 +숫자 --> 출력
+
+● 8. 변수
+1. 값?
+- 토큰 : 특정의미를 가진 문자
+- 리터럴, 키워드, 식별자, 연산자, 구분자
+
+  System.out.println("hello");
+
+2. 값의 보관
+- 값의 보관 == 메모리 확보
+- 변수 : 변하는 수 (오픈 박스) , 한개의 값
+- 상수 : 변하지 않는 수 (밀봉 박스)
+- 변수 이름 규칙 : $_소문자7
+
+3. 변수 사용 법
+  자료형 변수명;
+ 
+  int a;       --> int 정수 1,2,3            a[ ]
+  double b; --> double 실수 1.23       b[ ]
+
+  a=10;				a[10]
+  a=20;				a[20]
+
+※ 상수 final int JAVA_HOME; -->수정못함
+
+● 9. 자료형 (1)
+1) 자료형의 구분
+ - 기본형 : 실제 값 저장
+ - 참조형 : 주소 값 저장 ( String )
+
+2) 기본 자료형
+ 논리형 - boolean  true/false
+ 정수형 - byte(1byte) - short(2byte) - int(4byte)★ - long(8byte)    long l = 4L;
+ 실수형 - float(4byte) - double(8byte) ★ (4-8)
+	float f = 3.14f; double d=3.14;
+
+★ 자바 기본 처리 단위
+★ 정수 < 실수 float f = 1L;
+
+
+● 10. 자료형 (2) 형변환
+1. 기본형
+1) 논리형 - boolean : true/false
+2) 정수형 - byte(1) - short(2) - int(4) ★ - long(8:L)
+3) 실수형 - float(4:3.14f) - double(8)★
+
+2. 형 변환
+1) 데이터 타입을 다른 타입으로 변환하는 것
+2) boolean 빼고 변환가능 
+3) 자동타입 변환(작은타입은 큰 타입으로 자동변환) / 강제 타입 변환
+- (float) , (int)
+4) 자동 타입 변환
+- byte by =1;     by[1]
+  int in = 0;       in[4]
+  in = by;
+5) 강제 타입 변환
+- int in = 0;       in[4]
+  byte by =1;     by[1]
+  by = in; ※ error
+- 해결방안)  by = (byte)in;
+
+
+3. char
+1) 유니코드 - 2byte
+char ch1 = ' ';
+char ch2 = '\u0000';  - 유니코드\u
+
+2) 저장시 숫자로 출력 문자로
+3) 문자열에서 문자처리
+
+
+※ 자바자료형 범위 찾아보기
+
+
+● 11. 연산자
+1. 연산?
+1) 데이터를 처리해서 결과값을 산출하는 과정
+
+2. 종류
+먼저    값을 구하고           비교                 조건 처리 후    대입
+ ()     +,-,*,/,%(나머지)    < >,<=,>=,==,!=       &&, || , ?: ,    =,+=,-=....
+
+3. 필수 조건
+
+● 12. 조건문(1)
+1. 프로그램 코드 실행흐름
+  - 위 -> 아래, 왼쪽 -> 오른쪽
+  - 제어문은 개발자가 원하는 방향으로변경할 수 있도록 도와줌
+
+● 12. 조건문(2)
+2. 제어문의 종류
+   조건문       : if, switch
+   반복문       : for, while, do while
+   제어 키워드 : break, continue
+
+1) for(초기문; 조건문; 증감문;){반복해야할 내용} - 반복횟수를 알고 있을때
+2) while(){} - 반복 횟수 모를때 예)게시판
+
+   초기문;
+   while(조건문){ 반복해야할 내용 증감문;}
+
+3) do{ 반복해야 할 내용 }while( 조건문 ); -  무조건 1번은 실행
+
+
+● 14. array 배열
+1. 배열?
+- [같은 타입]의 데이터를 연속된 공간에 저장하는 자료구조
+- 각 데이터의 저장위치 인덱스를 통해서 접근
+
+int a = 10; // 비교
+
+int [] arr = { 1,2,3 };
+-----------------------------------------------------------
+[heap-동적데이터]       [stack-임시데이터]       
+1번지{1,     2,     3} ← arr : 1번지
+   arr[0] arr[1] arr[2]
+-----------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
