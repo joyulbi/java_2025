@@ -6,6 +6,7 @@ public class BankMiniProject {
 	public static void main(String[]args) {
 		Scanner scanner = new Scanner(System.in);
 		String id= "";
+		String[]iid = null;
 		String psd="";
 		String inputid = "";
 		String inputpsd="";
