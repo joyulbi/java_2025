@@ -11,8 +11,8 @@ public class BankMiniProject {
 		String inputpsd="";
 		int age = 0;
 		int bal = 0;
+		int bal2=0;
 		int choice =0;
-		
 		while(choice!=9) {
 			System.out.println("\n=========BANK=========");
 			System.out.println("1.추가");
@@ -29,8 +29,9 @@ public class BankMiniProject {
 				inputid = scanner.next();
 				System.out.print("비밀번호 입력:");
 				inputpsd = scanner.next();
-				break;
-			}
+				if(!(inputid.equals(id) && inputpsd.equals(psd))) {
+					System.out.println("아이디를 다시확인해주세요");choice = 0;}
+				break;}
 			switch(choice){
 			case 1: 
 				System.out.print("아이디 입력:");
@@ -43,25 +44,23 @@ public class BankMiniProject {
 				bal = scanner.nextInt();
 				break;
 			case 2 : 
-				if(inputid.equals(id) && inputpsd.equals(psd)) {
 					System.out.println("\n\n<<<<<계좌조회>>>>>\n");
 					System.out.println("ID : "+""+id+"");
 					System.out.println("PASSWORD : "+""+psd+"");
 					System.out.println("나이 : "+age);
 					System.out.println("잔액 : "+bal);
-				}else {System.out.println("다시확인해주세요");}break;
+					break;
 			case 3:
-				if(inputid.equals(id) && inputpsd.equals(psd)) {
 					System.out.print("입금:");
 					bal += scanner.nextInt();
-				}else{System.out.println("아이디를 다시확인해주세요");}break;
+					break;
 			case 4:
-				if(inputid.equals(id) && inputpsd.equals(psd)) {
 					System.out.print("출금:");
-					bal -= scanner.nextInt();
-				}else{System.out.println("아이디를 다시확인해주세요");}break;
+					bal2 = bal - scanner.nextInt();
+					if(bal2>=0) {bal=bal2;}
+					else {System.out.println("잔액이 부족합니다");}
+					break;
 			case 5:
-				if(inputid.equals(id) && inputpsd.equals(psd)) {
 					System.out.print("아이디를 삭제하시겠습니까? Y,N:");
 					char cancel = scanner.next().charAt(0);
 					if(cancel == 'Y'||cancel == 'y') {
@@ -69,7 +68,7 @@ public class BankMiniProject {
 						psd = "";
 						System.out.println("계정삭제를 완료하였습니다.");
 					}else {System.out.println("계정삭제를 취소하셨습니다.");}
-				}else {System.out.println("아이디를 다시 확인해주세요");}break;
+					break;
 			}
 		}
 		System.out.println("종료하겠습니다");
