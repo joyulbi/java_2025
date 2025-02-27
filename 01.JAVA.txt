@@ -7,13 +7,14 @@
  운영체제와 하드웨어에 관계없이 실행
 - OOP  
 
+
 ● 2. OOP 특징
 - object oriented programming
 - 부품객체(class)를 조립해서 만들어가는 프로그래밍 기법
 
 part1) control ★
    - 변수 / 자료형 / 제어문 ( if/switch/for, while, do while) / array / method
-part1) oop 특징 ★ 면접문제 많이나옴
+part2) oop 특징 ★ 면접문제 많이나옴
    - class / static, final, modifier / 상속 / abstract, interface / 예외처리
 part3) oop 활용
    - collection ( ArrayList ), Thread, lambda + Stream / io / network
@@ -36,6 +37,7 @@ part3) oop 활용
 -------------------------------------
 java -version
 -------------------------------------
+
 
 ● 4. 설치 (2) eclipse
 1) eclipse.org - 다운롤드 - java EE
@@ -244,7 +246,7 @@ int [] arr = { 1,2,3 };
 -----------------------------------------------------------
 
 
-● 15. method?
+● 15. method (1)
 1. method?
 - 코드 재사용
 - 실행 하고자 하는 명령어들을 {} 안에 한꺼번에 모아놓고
@@ -256,10 +258,76 @@ step1) 함수정의
 step2) 함수호출
 
 
+● 16. method (2)
+1. 오버로딩
+- 비슷한 동작을 수행하는 메서드들을 [같은 이름]으로 일관되게 작업하는 것.
+- 파라미터 [타입]과 [개수]로 구분
+- public, static, return값은 오버로딩에 영향을 미치지 않음
 
-
-
+※ 참고사항 - 오버라이딩
+- 상속시 자식클래스에서 맞게 메서드를 수정
  
+
+2. call by value vs call by reference
+- call by value : 전달 받은 값을 복사해서 처리 / 원본 값은 변경되지 않음
+
+  void show(int a){ System.out.println(a*10); }
+         show(1); //10
+
+- call by reference : 전달 받은 주소를 직접 참조해서 처리 / 원본 값은 변경됨
+
+  int [] a = {1,2,3};
+  void show(int[]a){ a[0]*=10; }
+        show(a);
+  System.out.println( a[0] ); //10
+
+
+
+
+------------------------------------------------------------------------------
+part2) oop 특징 ★ 면접문제 많이나옴
+   - class / static, final, modifier / 상속 / abstract, interface / 예외처리
+------------------------------------------------------------------------------
+◎ 1. CLASS?
+1) 자바 저장단위
+- 변수 < 배열 < 클래스
+
+2) 클래스(CLASS)
+- 객체의 특징
+- 부품 객체
+- 상태(멤버변수)와                행위(멤버함수)를 갖는다. 
+   ex) 바퀴클래스,엔진클래스 + 드라이브, 후진, 파킹
+
+3) OOP? ★
+- 객체                지향          프로그래밍
+- Object             Oriented     Programming
+- 틀                   기반          프로그램
+- 부품객체(클래스) 조립 완성된 프로그램을 만드는 기법
+
+4) 클래스와 인스턴스
+- 1. 클래스(설계도)틀로 ex) 붕어빵틀
+- 2.	     인스턴스화를 통해(new 실제 메모리-heap에 객체만들기)
+- 3. 		       여러개의 객체(인스턴스)를 만들기
+			  ex) 객체(Objext) - 붕어빵들
+			       인스턴스     - 팥붕어빵, 슈크림 붕어빵 각각.....
+> 클래스는 설계도
+> 인스턴스는 실제로 만들어진 객체
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

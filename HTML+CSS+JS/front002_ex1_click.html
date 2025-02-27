@@ -22,6 +22,8 @@
         <button  class="btn btn-danger  my-3"  onclick="alert('one')"  > ONE </button>
         <button  class="btn btn-warning my-3"  onclick="alert('홍길동')"> TWO </button>
         <button  class="btn btn-info    my-3"  onclick="alert(1);  alert(2); alert(3);"> THREE </button>
+        <button class="btn btn-warning my-3" onclick="alert('조율비')">ONE</button>
+        <button class="btn btn-warning my-3" id="two">TWO</button>
      </div> 
      <!-- BASIC -->
       <div class="container card my-5">
@@ -35,6 +37,7 @@
         <script>
           //이벤트대상.이벤트 = 이벤트 핸들러(처리)
           document.getElementById("a").onclick=function(){alert('dog');alert('cat');};
+          document.getElementById("two").onclick=function(){alert('조율비')};
         </script>
       </div>
 </body>
