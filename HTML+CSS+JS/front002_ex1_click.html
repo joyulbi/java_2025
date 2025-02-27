@@ -34,10 +34,21 @@
         <button class="btn btn-warning my-3" onclick="alert('alpha')">TWO</button>
         <button class="btn btn-warning my-3" onclick="alert('dog'); alert('cat');">animal1</button>
         <button class="btn btn-warning my-3" id="a">animal2</button>
+        <button class="btn btn-warning my-3" id="b">animal3</button>
+        <button class="btn btn-warning my-3 c">animal4</button>
         <script>
           //이벤트대상.이벤트 = 이벤트 핸들러(처리)
           document.getElementById("a").onclick=function(){alert('dog');alert('cat');};
-          document.getElementById("two").onclick=function(){alert('조율비')};
+          //#b는 css 표현법이고 아이디가 b인 것을 찾으라는 뜻
+          document.querySelector("#b").onclick=function(){
+            document.querySelector("#b").style.background="black";
+            document.querySelector("#b").style.color="white";
+          }
+          // .c - css 표현법 - 클래스가 c
+          document.querySelector(".c").onclick=function(){
+            document.querySelector(".c").style.background="red";
+            document.querySelector(".c").style.color="blue";
+          }
         </script>
       </div>
 </body>

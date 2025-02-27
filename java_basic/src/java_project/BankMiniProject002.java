@@ -6,8 +6,10 @@ public class BankMiniProject002 {
 	public static void add() {}
 	public static void main(String[]args) {
 		Scanner scanner = new Scanner(System.in);
-		String id= "";
-		String psd="";
+		String[]id = new String[3];
+		String[]psd = new String[3];
+		//String id= "";
+		//String psd="";
 		String inputid = "";
 		String inputpsd="";
 		int age = 0;
@@ -36,10 +38,9 @@ public class BankMiniProject002 {
 			switch(choice){
 			case 1: 
 				System.out.print("아이디 입력:");
-				id = scanner.next();
-				//iid[i]= ;
+				id[0] = scanner.next();
 				System.out.print("비밀번호 입력:");
-				psd = scanner.next();
+				psd[0] = scanner.next();
 				System.out.print("나이 입력:");
 				age = scanner.nextInt();
 				System.out.print("잔액 입력:");
@@ -66,8 +67,8 @@ public class BankMiniProject002 {
 					System.out.print("아이디를 삭제하시겠습니까? Y,N:");
 					char cancel = scanner.next().charAt(0);
 					if(cancel == 'Y'||cancel == 'y') {
-						id = "";
-						psd = "";
+						id[0] = "";
+						psd[0]= "";
 						System.out.println("계정삭제를 완료하였습니다.");
 					}else {System.out.println("계정삭제를 취소하셨습니다.");}
 					break;
