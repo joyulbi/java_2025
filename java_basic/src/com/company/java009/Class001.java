@@ -18,7 +18,7 @@ public class Class001 {
 }
 /*	10번째줄 : A1 a = new A1();
 ----------------------------------------- [runtime data area]
-[method : 정보, static, final : 공용 정보] A1.class, public Class001.class
+[method : (정보, static, final - 공용 정보)] A1.class, public Class001.class
 ------------------------------------------------------------------------
 [heap : 동적]		|[stack : 잠깐 빌리기]
  1번지 : A1{ }	    ← a (1번지) 

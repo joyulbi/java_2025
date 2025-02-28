@@ -26,7 +26,7 @@ public class ClassEx001 {
 }
 /*	클래스는 설계도 - 인스턴스화( heap - new - 객체생성 )를 통해 - 객체(객체들 s1,s2,s3 뭉쳐서 표현) / 인스턴스(각각의 s1,name,s2) 
 ----------------------------------------- [runtime data area]
-[method : 정보, static, final : 공용 정보]  Student001.class / ClassEx001.class
+[method : (정보, static, final - 공용 정보)]  Student001.class / ClassEx001.class
 -----------------------------------------
 [heap : 동적]	  									   		 |[stack : 잠깐 빌리기]
 20번째줄 : 1번지 {name=first, no=11, kor=100, eng=100, math=99} ← s1 : 1번지

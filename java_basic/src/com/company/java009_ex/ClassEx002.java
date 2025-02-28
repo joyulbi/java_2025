@@ -24,7 +24,7 @@ public class ClassEx002 {
 }
 /*	클래스(설계도) - 인스턴스화(실제객체) - 객체(인스탄스들....)/인스턴스 p1.name
 ----------------------------------------- [runtime data area]
-[method : 정보, static, final : 공용 정보]  MyPrice001.class / ClassEx002.class
+[method : (정보, static, final - 공용 정보)]  MyPrice001.class / ClassEx002.class
 -----------------------------------------
 [heap : 동적]	  				      |[stack : 잠깐 빌리기]
 23번째줄 :                               p1.show(); 1번지.show(); { }

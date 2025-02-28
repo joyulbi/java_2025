@@ -18,7 +18,7 @@ public class Class002_Animal {
 }
 /*	10번째줄 : A1 a = new A1();
 ----------------------------------------- [runtime data area]
-[method : 정보, static, final : 공용 정보]  Animal002(클래스-설계도), public Class002
+[method : (정보, static, final - 공용 정보)]  Animal002(클래스-설계도), public Class002
 -----------------------------------------
 [heap : 동적]		           |[stack : 잠깐 빌리기]
 15번째줄 : 2번지{name=null,age=0} ← a (2번지) 
