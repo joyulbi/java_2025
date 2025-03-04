@@ -10,13 +10,8 @@ public class BankMiniProject002 {
 		String[]psd = new String[3];
 		int[]age = new int[3];
 		int[]bal = new int[3];
-		//String id= "";
-		//String psd="";
 		String inputid = "";
 		String inputpsd="";
-		//int age = 0;
-		//int bal = 0;
-		
 		int bal2=0;
 		int choice =0;
 		
@@ -32,23 +27,21 @@ public class BankMiniProject002 {
 			System.out.print("입력>>");
 			choice = scanner.nextInt();	
 			int k = -1;
-			for(int i =0; i<id.length; i++) {
-				if(choice>=2&&choice<=5) {
-					System.out.print("아이디 입력:");
-					inputid = scanner.next();
-					System.out.print("비밀번호 입력:");
-					inputpsd = scanner.next();
-				}break;
+			
+			if(choice >= 2 && choice <= 5) {
+				System.out.print("아이디 입력:"); inputid = scanner.next();
+				System.out.print("비밀번호 입력:"); inputpsd = scanner.next();
+				for(int i = 0; i < id.length; i++) {
+					if(inputid.equals(id[i]) && inputpsd.equals(psd[i])) {
+						k=i;
+						break;
+					}
+				}
+				if(k==-1) {
+					System.out.println("아이디를 다시 확인해주세요");
+					choice = 0;
+				}
 			}
-//			switch(choice){
-//			case 2:case 3:case 4:case 5:
-//				System.out.print("아이디 입력:");
-//				inputid = scanner.next();
-//				System.out.print("비밀번호 입력:");
-//				inputpsd = scanner.next();
-//				if(!(inputid.equals(id[k]) && inputpsd.equals(psd[k]))) {
-//					System.out.println("아이디를 다시확인해주세요");choice = 0;}
-//				break;}
 			switch(choice){
 			case 1: 
 				for(int i=0;i<3;i++) {
@@ -61,12 +54,10 @@ public class BankMiniProject002 {
 						age[i] = scanner.nextInt();
 						System.out.print("잔액 입력:");
 						bal[i] = scanner.nextInt();
-						k=i;
 						cnt++;
-						System.out.println(k);
 					}
 					}
-				//id가 aa면 첫번째 값 출력 id 가 bb면 두번째 값 출력
+
 				break;
 			case 2 : 
 					System.out.println("\n\n<<<<<계좌조회>>>>>\n");
