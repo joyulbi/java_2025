@@ -3,12 +3,12 @@ package java_test;
 
 //오버라이딩
 class milk{
-	static void milk() {
+	 public void milk() {
 		System.out.println("우유");
 	}
 }
 class milk_1 extends milk{
-	static void milk() {
+	@Override public void milk() {
 		System.out.println("딸기우유");
 	}
 
@@ -18,8 +18,11 @@ class milk_1 extends milk{
 
 public class SelfTest022 {
 	public static void main(String[] args) {
+		milk milk = new milk();
 		milk.milk();
+		milk_1 milk_1 = new milk_1();
 		milk_1.milk();
 	}
 
 }
+//다른 클래스 하나를 상속받아서 같은 메서드

@@ -1,0 +1,29 @@
+Q1. runtime data area 주로 사용하는 3가지 부분
+method(정보공유), heap(동적) stack(임시)
+
+Q2. 제어자 넓은 범위에서 좁은 범위로
+public(아무데서나) > protected(extends) > package(같은 폴더) > private(클래스내-getters/setters)
+
+Q3. 파일분리를 하려고 합니다.
+Q3-1.  com.company.ex 패키지에 저장
+class A{  
+    private String name;   
+    private  int age;
+
+    public A(){}
+    public A(String name, int age){  this.name=name; this.age = age;}
+    //##3-3 tostring
+    @Override  public String toString(){  return  "A[name="+name+",age="+age+"]"; }
+    //##3-4 setter/getter
+    public String getName(){  return name; }
+    public void setName(String name){ this.name=name; }
+    public int    getAge(){  return age; }
+    public void setAge(int age){ this.age=age; }
+}
+ 
+Q3-2.  com.company.basic 패키지에있는 Test.java 파일에서 class A를 사용할 수 있게 만드시오.
+   A a1 = new A();  을 할수 가 없음! 
+   
+   
+   
+   ===>class A앞에 public을 붙여야함
