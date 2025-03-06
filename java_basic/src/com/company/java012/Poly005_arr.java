@@ -7,6 +7,7 @@ package com.company.java012;
 			  Calc  
 	  ↑	   ↑	  ↑	      ↑
 	Plus Minus Multiply Divide  
+   (exec)(exec)(exec)   (exec)
 */
 
 class Clac extends Object{void exec(double d1,double d2){System.out.println();}}

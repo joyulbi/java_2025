@@ -516,8 +516,50 @@ Animal [] anmais = { new Cat(),new Cat(),new Person(),new Person() }
 
 
 
+◎ 8. abstract
+1. 추상화( abstract )
+ - 실체화된 객체들 간에 공통된 속성을 추출한 것
+ - 미완성적인 개념 ( new 사용하지 못함 )
+ - 공통된 필드와 메서드의 이름을 통일 할 목적
+
+2. 추상 클래스  
+abstract class Animal{  //abstract class
+   String name;  // 인스턴스 변수 - this
+   abstract void sound(); // abstract method {}구현부 없음
+}
+class Cat extends Animal{
+   @Override void sound(){ }
+}
+
+2-1) Animal ani = new Animal(); X
+2-2) 자식클래스를 이용해서 구현해야함.
 
 
+◎ 9. interface
+1. interface
+ - 개발코드와 객체사이 연결
+ - 개발코드 변경없이 객체를 바꿔낄 수 있도록 하는 역할
+
+2. abstract( Is A ) vs interface( can do this )
+ - 추상화 정도가 interface가 더 높다
+ 1) abstract - 인스턴스변수, 일반 메서드 둘 다 가질 수 있으나
+ 2) interface - 상수(public static final) + 추상 메서드(public abstract)만 가짐
+
+3. 프로젝트 진행시 interface 사용하면
+   다른구성원들이 각각의 부분을 완성할때까지 기다리지 않고
+   규약만 정해두고 본인부분만 작성
+
+4. interface 형식
+
+   interface 인터페이스명 {
+	상수; //public static final 붙음! method area
+	추상메서드; //public abstract 붙음! {}X- this X
+   }
+
+   class InterSon implements 인터페이스명{ }
+
+   class InterSon2 extends 클래스명 implements 인터페이스명1, 인터페이스명2{ }
+   // 구현력이 없어서 다중상속 가능
 
 
 
