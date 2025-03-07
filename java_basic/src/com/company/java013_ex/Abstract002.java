@@ -1,4 +1,4 @@
-package com.company.java013;
+package com.company.java013_ex;
 /*
 Shape002{showArea(int w, int h); showArea(int r);}
 	  ↑		       ↑		 ↑
