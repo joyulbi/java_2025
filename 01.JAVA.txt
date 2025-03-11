@@ -571,14 +571,36 @@ class Cat extends Animal{
 - 인터페이스 테스트, ui이벤트 처리객체
 
 
+◆ 1.Collection Framework
+1. 저장단위
+변수 < 배열 < 클래스 < 콜렉션 프레임 워크 < 파일 <db
+
+2. 콜렌션 프레임 워크
+- [배열]의 단점을 개선한 클래스, 객체(클래스)만 저장가능
+- 동적 배열
+
+- 배열
+ 1) 같은 타입만 묶어서 저장 가능
+ 2) 배열생성시 크기를 지정해서 사용
+     추후 변경이 불가능 Stirng[] arr = new String[3];
+
+3. 핵심 인터페이스
+ 1) List : 순서가 있음 O, 중복 허용 O, 기차 
+ 2) Set : 순서가 없음X, 중복 허용X, 주머니
+           add,get(X) 향상된 for/Iterator, size, remove, contains
+ 3) Map : key, value 쌍
+            add(x) put
+            ,get(key) 향상된 for/Iterator, size, remove, contains
 
 
 
+◆ 2. Lambda + Stream
+1. Lambda?
+ - 자바에서 함수적 프로그래밍 지원 기법
+ - 코드 간결하게
 
-
-
-
-
+ - 함수형 인터페이스
+ : 1개의 추상메서드를 갖는 인터페이스
 
 
 
