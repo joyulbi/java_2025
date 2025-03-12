@@ -1,9 +1,8 @@
 package java_project001;
 
 import java.util.Scanner;
-
+//array추가
 public class BankMiniProject002 {
-	public static void add() {}
 	public static void main(String[]args) {
 		Scanner scanner = new Scanner(System.in);
 		String[]id = new String[3];
@@ -44,6 +43,7 @@ public class BankMiniProject002 {
 			}
 			switch(choice){
 			case 1: 
+				int cnt2=0;
 				for(int i=0;i<3;i++) {
 					if(id[i]==null&&cnt==0) {
 						System.out.print("아이디 입력:");
@@ -80,9 +80,10 @@ public class BankMiniProject002 {
 					System.out.print("아이디를 삭제하시겠습니까? Y,N:");
 					char cancel = scanner.next().charAt(0);
 					if(cancel == 'Y'||cancel == 'y') {
-						id[k] = "";
-						psd[k]= "";
+						id[k] = null;
+						psd[k]= null;
 						System.out.println("계정삭제를 완료하였습니다.");
+						cnt--;
 					}else {System.out.println("계정삭제를 취소하셨습니다.");}
 					break;
 			}

@@ -1,0 +1,168 @@
+Q1. OOP란?
+> Object Oriented Programming
+> 객체 지향 프로그램
+> 클래스(부품객체) 조립해서 만들어가는 프로그램
+
+Q2. CLASS  vs  INSTANCE  의 차이점?
+> 클래스는 설계도이고 인스턴스화를 통해객체를 만든것임
+> 인스턴스는 실제 메모리인 heap area에 실체화를 한 것
+
+Q3.  다음코드를 보고 빈칸을 채우시오
+-------------------------------------------------
+A11 a1 = new A11();
+-------------------------------------------------
+1. 메모리빌려오고 객체생성하는 역할 :   ( new )
+2. String null, int는 0으로 초기화 : ( A11() )
+3. new A11() 한 주소를 갖고 있는 것은 : ( a1 )
+
+
+Q4.  생성자 ex) Q3번에 A11()을 말함
+1.  역할?  ( 초기화를 하는 역할 ) 
+2.  [클래스 생성]할때 제일먼저 실행되는 특수한형태의 메서드
+3. 생성자는 리턴값이    ( 없다 )   
+4. 클래스명과 이름이 ( 동일하다 )
+
+
+Q5. 기본생성자를 반드시 선언해야하는 경우
+     ( 생성자 오버로딩 / 상속 )
+ 
+Q6.  다음코드를 확인하고 클래스를 작성시 RUNTIME DATA AREA 의 빈칸을 채우고 설명하시오.
+----------------------------------------------------------------------------------------------------------------
+class  Tv002{
+     String channel;      int volume;
+     public Tv002(){  }
+     public Tv002(String channel,  int volume){ 
+    	this.channel = channel;   this.volume = volume;
+     }
+     public void show(){
+         System.out.println( "Tv채널 > " + channel );
+         System.out.println( "Tv볼륨 > " + volume;);
+     }
+    public void input(){
+         Scanner scanner = new Scanner(System.in);
+         System.out.print( "Tv채널 > "  ); channel = scanner.next();
+         System.out.print( "Tv볼륨 > "  ); volume = scanner.nextInt();
+    }
+}
+public class Test{
+    public static void main(String[] args){
+    	Tv002  a1 = new Tv002(  "MBC" , 6 );   a1.show();
+    	Tv002  a2 = new Tv002();     a2.input(); a2.show();
+    }
+}
+
+----------------------------------------------------------------------------------------------------------------
+
+파일명    :    ( Test.java )    
+위의 코드에서 생성되는 클래스명 : (  Tv002.class    /   Test.class   )
+----------------------------------------------------------------
+[method 정보]  (  Tv002.class    /   Test.class   )
+----------------------------------------------------------------
+[heap]                             |   [stack]
+										   a2.show(){int a=0;}					
+										   a2.input(){}
+2000번지{channel=null, volume=0}  <------ ( a2 : 2000번지 )     ]
+										   a1.show(); 1000번지.show();
+1000번지{channel=MBC, volume=6}   <------ ( a1 : 1000번지 )     ] 
+		                      	   |  [main]
+----------------------------------------------------------------
+
+
+
+Q7.   클래스에서 사용가능한 변수들의 범위와 역할
+6-1. 자바메모리구조 - RUNTIME DATA AREA
+6-2. RUNTIME DATA AREA를 적으시오.
+1) ( method )     area : 정보저장 (클래스 정보, static, final)
+2) ( heap )     area : 실체화(객체-인스턴스)저장 , Garbage Collector가 처리 
+3) ( stack )     area : 임시값 저장 , 메서드의 작업공간 , 지역변수 잠깐사용되는 데이터
+
+
+
+Q8. 다음파일을 확인하고 빈칸을 채우시오.각 변수의종류를 찾아 적으시오.
+------------------------------------------------------------------------------------------
+class A{
+    int a;    
+    static String Company="(주) Hello"; 
+
+    void method(){  int a; System.out.println(a);       }
+    void    show(){             System.out.println(this.a);  } 
+
+    public A(){   }
+    public A(int a) {   this.a = a;   }   
+}
+---------------------------------------------------------------------------------------------
+8-1. 멤버변수의 종류
+클래스(static)변수     :    ( Company )   ,   메모리위치 영역 - method area
+인스턴스변수           :    (class A안에 int a )   ,   메모리위치 영역 -  ( heap ) area
+지역변수                 :    ( method() 안에 int a )   ,   메모리위치 영역 -   ( stack ) area
+
+8-2. 오류가 날만한 위치는?
+> 오류 나는 곳 : void method(){  int a; System.out.println(a);       }
+> 오류 수정하는 방법 : int a=0;초기화를 잡는다
+> stack은 수동으로 초기화를 해줘야 한다.
+
+8-3.  멤버변수의 초기화 순서를 적으시오.
+> 초기값 - 명시적 초기화 - 초기화 블록 - 생성자
+
+8-4.  A클래스의 Company 변수를 사용하려고 한다. 사용방법을 적으시오.  
+	class A{
+	    int a;    
+	    static String Company="(주) Hello"; 
+	    
+	 A.company
+
+Q9.  다음코드를 확인하고 다음문제를 풀으시오.
+------------------------------------------------------------------------------------------------
+final class  FinalBasic extends Object{
+	final static String MERRY_CHRISTMAS = "12-25";  // 1) 
+	String name;        
+	int    age;		 
+	final  void show() {
+		System.out.println("::::::::::: static + final");
+		System.out.println(":: 이름 : "  + this.name );
+		System.out.println(":: 나이 : "  + this.age  );
+	}
+	@Override public String toString() { return "FinalBasic [name=" + name + ", age=" + age + "]"; }
+}
+class   FinalBasic2 extends  FinalBasic{
+	@Override void show() {  System.out.println("HELLO~" +  name); }
+}
+------------------------------------------------------------------------------------------------
+final - 하지마
+클래스에 붙으면 상속하지말란뜻/ 멤버변수에 붙으면 상수가됨/멤버함수에 붙으면 오버라이딩 하지 말라는 뜻
+
+9-1.  오류나는 부위를 적으시오.
+> class   FinalBasic2 extends  FinalBasic
+> @Override void show() 
+
+9-2.  오버로딩과 오버라이딩의 차이점은?
+> 오버로딩 : 비슷한 기능을 하는 메서드들의 이름을 같게하고, 파라미터에 argument의 자료형과 개수로 구분하는 것
+> 오버라이딩 : 상속시 부모의 메서드를 자식클래스에 맞게 수정하는것
+
+Q10.  다음 주어진옵션을 보고 코드를 작성하시오.
+------------------------------------------------------------------------------------------------
+ class Marine{   
+	// 멤버변수
+	int x; int y;  int hp; // 각 병사의 x, y좌표 ,  hp 병사의 체력     >인스턴스 변수
+						   // > heap area, new O,  this 각각
+	int weapon = 5;    	   // > 공격력 	 클래스변수  
+	int armor  = 0;        // > 방어력  클래스변수
+						   // > method area, new X, 공유
+	
+	// 멤버함수
+	void move(int x, int y){  this.x = x;   this.y=y; } // > 지역변수 int x, int y
+														// > stack 영역
+        void weaponUp() {  weapon++; }
+	void armorUp()  {  armor++;  } 
+	// 생성자
+}
+------------------------------------------------------------------------------------------------
+10-1.  Marine은 각 병사가 가진 내용이다.  (각 병사의 x, y좌표 ,  hp 병사의 체력)
+공격력과 방어력은 병사들이 합쳐진 힘이다.
+static을 붙여야 하는 것은 어떤 것들이고 그 이유는 무엇인가  ?
+> 공통으로 사용하는 변수는 static을 붙여서 공유한다. runtime - method area
+
+10-2.  인스턴스변수, 클래스변수 구분하고 메모리 위치를 적으시오. 
+> 앞에(>)붙은게 답임.
+
+
