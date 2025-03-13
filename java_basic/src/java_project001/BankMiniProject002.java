@@ -24,6 +24,7 @@ public class BankMiniProject002 {
 			System.out.println("5.삭제");
 			System.out.println("9.종료");
 			System.out.print("입력>>");
+			//System.out.println(choice);
 			choice = scanner.nextInt();	
 			int k = -1;
 			

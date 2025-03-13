@@ -3,7 +3,7 @@ package com.company.java016_ex;
 import java.util.HashMap;
 import java.util.Map.Entry;
 
-public class MapEx004 {
+public class MapEx004_복습필요 {
 	public static void main(String[] args) {
 		String[] data = { "A", "D", "B", "D", "B", "D", "B", "C", "E", "C", "B" };
 		HashMap<String, Integer> map = new HashMap<>();
