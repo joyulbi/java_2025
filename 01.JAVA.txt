@@ -82,7 +82,7 @@ public class A001 {
  
 3번째줄 : public class A001{
 	public 아무데서나 접근가능 / class 부품객체 / A001 클래스이름
-4번째줄 : jvm 구동시작점
+4번째줄 : jvm 구동시작점ddd
 	public static void main(String [] args){}
 	public 아무데서나 접근가능 / static 메모리상 사용 가능 / void main(String[] args) 전원버튼 이름
 5번째줄 : System.out.println("Hello");
