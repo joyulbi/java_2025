@@ -5,6 +5,8 @@ import java.util.Scanner;
 
 
 
+
+
 ///////////////  Model(DB :  Dto , Dao x ,DBManager x)
 class Bank_v7 {
 	private String id;
@@ -44,7 +46,13 @@ interface Bank_Controller {
     void exec(Bank_v7[] users);
 }
 class   Input1   implements  Bank_Controller{  // 사용자에게 입력받는기능
-	@Override public void exec(Bank_v7[] users) {  }
+	@Override public void exec(Bank_v7[] users) { 
+		Bank_v7 bank = new Bank_v7();
+		Scanner scanner = new Scanner(System.in);
+		System.out.print("입금:");
+	//	balance += scanner.nextDouble();
+		
+	}
 }
 class   Show   implements  Bank_Controller{   // 사용자에게 조회기능
 	@Override public void exec(Bank_v7[] users) {  }
