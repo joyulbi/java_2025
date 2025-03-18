@@ -13,22 +13,20 @@
 </head>
 <body>
 	<div class="container card my-5">
-		<h3 class ="card-header"> REQUEST-요청 </h3>
-		<!-- action, method, name  -->
-		<!-- action="처리", method=데이터 넘기는 방법, name=데이터 보관 이름 -->
-		<p class="alert alert-warning">
-         https://www.google.com/search?q=APPLE<br/>
-         1.처리컨테이너 : https://www.google.com/search <br/>
-         2.처리방식      : get <br/>
-         3.보관용기      : q <br/>
-      	</p>
-		<form action="https://www.google.com/search" method="get">
-		  <div class="mb-3 mt-3">
+		<h3 class ="card-header"> MY SEARCH </h3>
+		<pre>
+		1. action    : jsp007_result.jsp
+		2. method    : get
+		3. 입력보관이름 : para
+		</pre>
+		<form action="jsp007_result.jsp" method="get">
+		  <div class="my-3">
 		    <label for="query" class="form-label">검색어</label>
 		    <input type="text" class="form-control" id="query"
-		           placeholder="구글에게 물어봐!" name="q"/>
-		  </div>
+		           name="para"/>
+		 
 		  <button type="submit" class="btn btn-danger">Submit</button>
+		 </div>
 		</form>
 	</div>
 </body>

@@ -26,7 +26,7 @@
 		  <div class="mb-3 mt-3">
 		    <label for="query" class="form-label">검색어</label>
 		    <input type="text" class="form-control" id="query"
-		           placeholder="구글에게 물어봐!" name="q">
+		           placeholder="구글에게 물어봐!" name="q"/>
 		  </div>
 		  <button type="submit" class="btn btn-danger">Submit</button>
 		</form>
