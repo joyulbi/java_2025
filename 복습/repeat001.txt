@@ -1,0 +1,57 @@
+Repeat001
+1-1. 자바 메모리 구조 - [run time data area] jvm 메모리 영역
+1-2. RUNTIME DATA AREA를 적으시오.
+1) (method ) area : 정보저장 (클래스정보, static, final)
+2) ( heap  ) 실체화
+3)  stack 임시 값 저장
+
+Q2. class instance 차이
+class  설계도  인스턴스는 실제로 만든 부품객체
+
+Q3. 다음의 의미를 적으시오
+A1 a =new A1();
+A1 클래스는 새로운 인스턴스를 생성
+
+Q4. class와 instance를 메모리 구조와 연결지어서 설명
+
+------------------------------ run time
+[method] A1.class, class001.class
+---------------------------------------
+[heap:동적]	  |[stack:지역]
+3번지 A1{} 	  ← a3 : 3번지
+2번지 A1{} 	  ← a2 : 2번지
+1번지 A1{} 	  ← a : 1번지
+		  | main
+---------------------------------------
+
+Repeat 002
+Q1. rdb? 관계형 데이터베이스 - 데이블들이 관계를 맺는 것 (외래키)
+Q2. mysql -uroot -p
+Q3. create database db1;
+Q4. use db1
+Q5. create table userinfos(
+no int not null auto_inrement primary key,,
+name varchar(100) noy null,
+age int
+);
+desc userinfos;
+show tables;
+
+Q6. alter table userinfos modify age int not null;
+
+Q7. alter table userinfos modify name vachar(50) not null;
+
+Q8. alter table userinfos add email vachar(50);
+
+Q9. alter table userinfos drop email;
+
+10. alter table userinfos rename userinfo;
+
+
+
+Repeat003
+Q1. 서비스 이용 (요청->request) 서비스 제공(응답->response)
+Q2. WS와 WAS?
+web server : 정적서버(apache)
+was server : 동적서버(apache + tomcat)
+Q3. FROM 태그 - 처리컨테이너(action)/ 처리방식 (method)/데이터 넘길 때 보관 이름(name)

@@ -1,0 +1,79 @@
+■ 1. WEB
+- TCP/IP 기반으로 연결되어 있는 컴퓨터 네트워크
+- 클라이언트 ↔ 서버
+- 1)  Web    프로그래밍 (Http 통신)   단방향통신 
+     ( Client요청시 Server응답 후종료)
+- 2)  Socket 프로그래밍 (채팅)           양방향통신 
+     ( 특정port를 통해 실시간으로 정보를 주고 받음 - 계속연결되어 있음)
+
+2. WS VS WAS
+- WS ( Web Server ) : 정적 콘텐츠 (html, css, js) 웹 브라우저에 제공
+  예) Apache
+- WAS ( Web Application Server ) : 동적 컨텐츠
+  브라우저와 dbms 사이에 동작하는 미들웨어
+  예) Apache + tomcat 
+
+3. Tomcat
+>> Http request( 요청 ) > Catalina > Context > Servlet > response
+response
+
+3-1) http request
+3-2) Coyte가 해결사차지 : http 요청을 처리할 웹 어플리케이션 (context)
+     	  	         web.xml 파일내용을 참고해서 요청전달.
+3-3) Cataline (Servlet)
+3-4) Jasper (JSP engine) : java+html 페이지 요청처리 응답(reponse)
+
+■ 2. JSP
+1. JSP 기본요소
+- HTML + JAVA
+
+1) 스크립트  : <%       %> 자바코드
+2) 지시자     : <%@    %>
+3) 주석        : <%-- --%>
+4) 표현        : <%=     %>출력
+5) 선언        : <!%      %>선언
+
+2. FORM
+: 서버쪽으로 정보전달
+  action = "요청처리"         method="요청처리방식" (get,post)
+  name = "데이터보관이름"  
+
+
+3. 쿼리스트링
+https://www.google.com/search?q=apple&name=yulbi
+
+- url 뒤에 [입력데이터]를 함께 제공하는 데이터 전달방법
+- get 방식 
+- 클라이언트[#] ↔ 서버
+
+4. request.getParameter("name값")
+- 클라이언트 ↔ 서버[#] 
+- request.getParameter("q")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

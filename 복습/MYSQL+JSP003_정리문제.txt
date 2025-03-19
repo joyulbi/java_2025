@@ -1,0 +1,105 @@
+>>>>>>>>>>>>>>>>>>>> 정리 PART001
+>>>>>>>>>>>>>>>>>>>> 정리 PART001
+>>>>>>>>>>>>>>>>>>>> 정리 PART001
+
+Q1. 자바의 접근자 범위를 넓은범위에서 좁은 범위로 적으시오.
+public > protected > default > private
+
+Q2. 오버로딩/오버라이딩 ? 
+오버로딩 : 메서드들의 이름을 같게하고 파라미터의 자료형과 갯수를 다르게 해 구별
+오버라이딩 : 상속 시 부모의 메서드를 자식의 기능에 맞게 수정
+
+Q3. abstract 과 interface 의 차이점은?
+추상도가 다르다
+abstract 클래스는 인스턴스변수, 메서드를 가질 수 있고
+interface는 상수와 abstract만 갖는다.
+그래서 설계시 interface를 더 많이 사용함
+
+Q4. 다형성은  한가지 타입(부모)으로 여러개의 자료형(자식)을 관리하려고 사용한다.
+다음을 확인하고 Driver클래스를 구현하시오.
+1. 상속도
+		Vehicle  (run())
+		↑		      ↑
+MotorCycle			  Car
+(run())				(run())   @Override
+
+Driver (사용객체 -MotorCycle , Car )
+
+
+2. 주어진코드 
+interface Vehicle { public void run(); }
+class MotorCycle implements Vehicle { @Override public void run() { System.out.println("오토바이가 달립니다."); } }
+class Car        implements Vehicle { @Override public void run() { System.out.println("자동차가 달립니다."); } }
+
+class Driver {
+void drive(Vehicle v){v.run();}
+}
+public class InterfaceEx003 {
+	public static void main(String[] args) {
+		Driver driver = new Driver(); 
+		Car car       = new Car();
+		MotorCycle mo = new MotorCycle(); 
+		driver.drive(car);   
+		driver.drive(mo);   
+	}
+} 
+
+
+>>>>>>>>>>>>>>>>>>>> 정리 PART002
+>>>>>>>>>>>>>>>>>>>> 정리 PART002
+>>>>>>>>>>>>>>>>>>>> 정리 PART002
+Q1. emp 테이블에서 
+ 부서번호가 30이고
+ 이름에 E가 포함되어 있는 사원중 
+ 급여(sal)가 1000~2000 사이가 아닌 값을 가진 데이터를 조회하시오.
+ 
+select* from emp where deptno =30 and ename like '%E%' and sal not between 1000 and 2000;
+
+ 
+ Q2. emp 테이블에서 
+ 추가수당(comm) 이 없고  
+ 상급자(mgr)은 존재하며
+ 직책(JOB) 'MANAGER', 'CLERK' 중에서 
+ 사원이름의 두번째 글자가 L이아닌  값을 가진 데이터를 조회하시오.
+
+select*from emp where comm is null and mgr is not null and job in('MANAGER', 'CLERK' ) and ename not like '_L%';
+
+
+>>>>>>>>>>>>>>>>>>>> 정리 PART003
+>>>>>>>>>>>>>>>>>>>> 정리 PART003
+>>>>>>>>>>>>>>>>>>>> 정리 PART003
+1. dynamic web project 에서 jdbc 연동하는 방법을 적으시오.
+1-1. [src]-[main]-[webapp]-[WEB-INF]-[lib]-connector-j.jar
+1-2. [src]-[main]-[webapp]-test.jsp
+
+2. select * from milk 라는 데이터를 jdbc를 이용하여 출력하시오. 
+ 2-1. 드라이버 연동  Class.forName("com.mysql.cj.jdbc.Driver");
+ 2-2. db연동   conn = DriverManager.getConnection(url, id, pass);
+ 2-3. PreparedStatement
+		pstmt = conn.prepareStatement("select * from milk");
+		rset = pstmt.executeQuery();
+ 2-4. 결과처리
+		while (rset.next()) {
+		out.println(rset.getInt("mno")+"/"+rset.getString("mname")+"/"+rset.getInt("mprice"));}
+		
+----------------------------------------------------------------------------------------------------------------------
+<%@page import="java.sql.*"%>
+<%
+   Connection conn = null; PreparedStatement pstmt = null; ResultSet rset = null;			
+   try {
+	Class.forName("com.mysql.cj.jdbc.Driver");
+	conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/mbasic", "root", "1234");
+	pstmt = conn.prepareStatement("select * from milk");
+	rset = pstmt.executeQuery();
+	while (rset.next()) {
+		out.println(rset.getInt("mno")+"/"+rset.getString("mname")+"/"+rset.getInt("mprice"));}
+   }catch(Exception e) { e.printStackTrace(); 
+   }finally{
+            if (rset != null) { rset.close(); }
+	if (pstmt != null) { pstmt.close(); }
+	if (conn != null) { conn.close(); } 
+   }			
+				
+%>				
+		
+			

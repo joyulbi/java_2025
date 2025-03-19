@@ -1,0 +1,328 @@
+■ 1. Mysql Why?
+1. DBMS ★
+- Database Management System
+- 데이터베이스 관리 시스템
+
+2. Database
+- Data + base
+- 1. 데이터(값) 2. 정보(의미부여)
+- 0도(춥겠다,옷 따듯하게), 486, 1004
+
+Q. 데이터 / 정보구분
+ 1-1. 데이터 - 1년동안 월간 우산 판매량을 조사 했습니다
+ 1-2. 정보 - 이 조사표를 가지고 처리해서 우산은 겨울보다 여름에 잘 팔린다는 결과를 얻었습니다. 
+
+3. Database 
+- oracle, mysql, mssql
+
+4. Setting
+- 버전확인
+- mysql Ver 8.0.41
+- https://dev.mysql.com/
+ > Download > Mysql Community Server
+
+5. 설치확인
+5-1. 접속
+--------------------------------
+mysql -uroot -p
+--------------------------------
+- 설정의미 -u 유저 / -p 패스워드
+
+5-2 설정확인
+
+status
+--------------------------------
+
+■ 2. RDB
+1. RDBMS ★
+- Relational Database Management System
+- 관계형 데이터베이스 관리 시스템
+- 테이블 관계
+
+2. RDBMS 구성요소
+- 개체 ( Entity : Table )
+- 관계 ( Relationship : 외래키 )
+- 속성 ( Attribute : 필드 )
+
+3. 데이터 베이스 언어 ★
+ 1) 정의어( DDL ) - create, alter, drop - CAD
+ 2) 조작어( DML ) - insert, select, update, delete - CRUD
+ 3) 제의어( DCL ) - grant, revoke
+
+
+4. 실습
+4-1 Database 만들기
+----------------------------------------------
+mysql>  -- database 확인
+mysql>  show databases;
+
+mysql> -- db (저장보관소) 가방만들기
+mysql> create  database test1; 
+
+mysql> -- db 삭제 -- 복구안됨.
+mysql> drop  database  test1; 
+----------------------------------------------
+
+
+5. TABLE ★
+- 저장소 안에 분류표
+--------------------------------
+create tabel 테이블명( 
+   필드1 자료형 속성,
+   필드2 자료형 속성
+);
+--------------------------------
+자료형
+   1) 숫자 - int, double
+   2) 문자 - char (고정 문자열 - y/n) / varchar (가변형 문자열) / text
+   3) 날짜 - date, datetime, timestamp
+속성
+   필수 입력 - not null ( 아니오, 값 없음 )
+   숫자 자동 증가 - auto_increment
+   기본키 - primary key
+
+5-1. 테이블 만들기
+create table t1(
+   name varchar(100) not null,
+   age int
+);
+
+5-2. 테이블들 확인
+show tables;
+
+5-3 테이블 구조확인
+desc t1;
+
+------------------------------------------------------------
+5-4. auto_increment, primary key
+create table t2(
+no int not null auto_increment primary  key,
+name varchar(100) not null,
+age int 
+);
+
+5-5 coffee
+create table coffee(
+cno int(11) not null  auto_increment primary key,
+cname varchar(50) not null,
+cprice int(11) not null
+);
+
+5-6 milk
+create table  milk(
+mno int(11) not null  auto_increment primary key,
+mname varchar(50) not null,
+mprice int(11) not null,
+mnum int(11) not null,
+mtotal int(11) not null
+);
+
+5-7 score
+create table score(
+sno int(11) not null primary key auto_increment,
+sname varchar(20) not null ,
+sjava int(11) not null,
+sjsp int(11) not null,
+sspring int(11) not null,
+sproject int(11) not null,
+sstotal int(11),
+ssavg  int(11),
+semail varchar(50)
+);
+
+5-8 emp
+create table emp(
+empno int(11) not null primary key auto_increment,
+ename varchar(20),
+job varchar(20),
+mgr int(11),
+hiredate date,
+sal int(11),
+comm int(11),
+deptno int(11)
+);
+
+5-9 dept
+create table dept(
+deptno int(11) not null primary key auto_increment,
+dname varchar(20) not null,
+loc varchar(20) not null
+);
+
+5-10 salagrade
+create table salagrade(
+grade int(11) not null primary key auto_increment,
+losal int(11),
+hisal int(11)
+);
+------------------------------------------------------------
+
+
+
+▷QUESTION1.  다음 빈칸을 채우시오
+1. RDBMS 는
+     (RDBMS :Relational DataBase Management System) 
+      *   관계형   데이터베이스   관리   시스템이라고 하며 
+      *  테이블(table) 들의   테이블들의 관계를 나타냅니다. 
+      *  사전정의된 관계로 데이터를 구성하는 정보모음을 말합니다.
+
+2. 테이블  - 테이블은  (#1.    행     #2.   열     )로 이뤄져 있습니다.  
+     1) (#3.   열      )- 분류속성을 의미
+         데이터의 종류, 특성,상태등을 정의하며  필드, 속성이라고도 합니다. 
+     2) (#4.   행    )- 관계된 데이터묶음
+         튜플, 레코드라고 합니다.  
+
+mysql> select * from t2;
+   열
+   ↓
++----+--------+------+
+| no | name   | age  |
++----+--------+------+
+|  1 | first  |   10 |    ←  행(줄), 튜플, 레코드
+|  2 | second |   20 |
+|  3 | second |   20 |
++----+--------+------+
+3 rows in set (0.00 sec)
+
+
+
+▷QUESTION2.  관계형데이터모델핵심구성요소를 적고 설명하시오.
+ - 테이블 ( 개체, Entity )
+ - 관계 ( Relationship : 연관관계, 외래키 )
+ - 속성 ( Atrribute, 필드, 열 )
+
+▷QUESTION3.  스키마의 정의 및 세가지 종류를 적으시오.
+ - 외부 스키마 = 사용자 뷰
+ - 개념 스키마 = 저전체적인 뷰
+ - 내부 스키마 = 저장 스키마 
+
+▷QUESTION4. 데이터베이스 설계단계  다음 빈칸을 채우시오
+1.  (#1. 개념적 설계     )  - 요구사항 분석 후 개념적 스키마 생성 
+                       ( 개체-관계 다이어그램 - ERD )   
+2. (#2. 논리적 설계    )  - ERD를  이용하여  
+                      데이터베이스 스키마(테이블 구조도)를 설계
+3. (#3. 물리적 설계    )  - DBMS가 제공하는 
+                      물리적구조에 테이블 저장 구조 설계
+                                   ( MYSQL, ORACLE,,,,)
+
+▷QUESTION5. 다음 빈칸을 채우시오
+데이터베이스 언어(Database Language)
+- 데이터베이스를     구축하고 이용하기 위한 사용되는 언어입니다.
+- 데이터 정의 언어, 데이터 조작 언어, 데이터 제어 언어로 구분됩니다.
+1.  데이터 정의 언어
+ - DDL (DATA DEFINITION LANGUAGE) 
+-  데이터베이스객체(테이블, 뷰, 인덱스....)의 구조를 정의
+-  종류 (#1.                  , #2.                  ,   #3.                    )
+
+2.  데이터 조작 언어
+- DML (DATA MANIPULATION LANGUAGE) 
+-  실제 데이터를 조작하는 언어
+-  종류 (#4.                     , #5.                    , #6.                       , #7.                     )
+
+3.  데이터 제어 언어
+-  DCL (DATA CONTROL LANGUAGE) 
+-  데이터베이스 사용자의 권한을 제어
+-  종류 (#8.                 , #9.                           ) 
+
+
+
+
+■ 3. key
+1. key? 튜(행, 레코드, 한 명의 정보)플들을 구분할 수 있는 기준필드
+           기준필드(행, 속성)
+   ------------------------------------------------------------------
+   no name    age  email		       부서번호(cno)
+   ------------------------------------------------------------------
+   2,  second, 10    second11@gmail.com      1
+   3,  second, 10    second33@gmail.com      1
+
+2. 후보키 - 기본키로 사용할 수 있는 속성                 no, email
+3. 기본키 - 후보키들 중에서 선택한 주 키( main key ) no
+4. 대체키 - 후보키들 중에서 선택 안 된 키                email
+5. 외래키 - 테이블 테이블을 연결해주는 속성            cno 
+6. 슈퍼키 - 속성 + 속성 집합으로 구성된 키	      no, name
+
+   [company]
+   ---------------------------------------
+   번호(cno)       부서          지역
+   ---------------------------------------
+   1            백엔드개발부    부평
+   2            프론트개발부    판교
+
+
+■ 4. alter
+1. alter
+- 데이터 정의 : create, alter, drop
+- 문법
+alter table 테이블면 add(추가)  필드명 자료형 속성
+		 drop(삭제) 필드명
+		 change (필드수정) 수정할 필드면 자료형 속성
+		 modify (필드수정) 수정할 필드명
+
+4-3.
+1. 이메일필드 email varchar(50)
+   alter table userinfo add email varchar(50)
+
+2. 이메일 필드 수정- 자료형
+   alter table userinfo modify email varchar(100) not null;
+
+3. 이메일 이름
+   alter table userinfo change email uemail varchar(100) not null;
+
+4. 이메일 삭제
+   alter table userinfo drop uemail;
+
+5. 테이블명
+   alter table userinfo  rename userinfo_alter;
+
+create table userinfo(
+no int not null auto_increment primary key ,
+name varchar(100) not null,
+age int not null
+);
+
+
+
+1. 테이블준비
+create table alter_coffee(
+cno int ,
+cname varchar(20),
+cprice int
+);
+
+2-1. alter table 테이블명( add, drop, modify#, change#, rename )
+ alter table alter_coffee modify cno  int not null;
+ alter table alter_coffee modify cname varchar(20) not null;
+ alter table alter_coffee change cprice cprice int not null;
+
+2-2. alter table 테이블명( add#, drop, modify, change, rename )
+ alter table alter_coffee add cgift varchar(10);
+
+2-3. alter table 테이블명( add, drop, modify, change#, rename )
+ alter table alter_coffee change cgift ccoupon varchar(10);
+
+2-4. alter table 테이블명( add, drop#, modify, change, rename )
+ alter table alter_coffee drop ccoupon;
+
+2-5. alter table 테이블명( add, drop, modify#, change#, rename )
+ alter table alter_coffee change cno cno int not null after cprice;
+ alter table alter_coffee modify cno int not null after cprice; 
+
+2-6. alter table 테이블명( add, drop, modify#, change, rename )
+ [FIRST | AFTER col_name]
+ alter table alter_coffee change cno cno int not null first; 
+
+2-7. alter table 테이블명( add#, drop, modify, change, rename )
+ alter table alter_coffee add PRIMARY KEY(cno);
+
+2-8. alter table 테이블명( add, drop, modify, change, rename#)
+ alter table alter_coffee rename alter_coffee2;
+
+2-9. alter table 테이블명( add, drop, modify#, change, rename)
+ alter table alter_coffee2 modify cno int not null auto_increment;
+
+
+
+
+
+

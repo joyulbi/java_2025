@@ -142,3 +142,137 @@ delete from emp_del where job='SALESMAN';
 delete from emp_del where job='MANAGER' and ename = 'JONES';
 #[003]
 delete from emp_del;
+
+
+#Repeat001
+use mbasic;
+desc milk;
+select *from milk;
+alter table milk drop mnum;
+alter table milk drop mtotal;
+insert into milk values(1,'white',1000);
+insert into milk values(2,'choco',1200);
+insert into milk values(3,'banana',1800);
+insert into milk values(4,'melon',5000);
+# 여러줄 실행 ctrl + shift + enter
+# 한줄 실행 ctrl + enter
+update milk set mprice=1500 where mno=4;
+delete from milk where mno=4;
+select *from milk;
+
+
+## ■ part002 진도 - select basic
+select * from userinfo;
+create table select_userinfo select * from userinfo;
+desc select_userinfo;
+alter table select_userinfo modify no int not null auto_increment primary key;
+select * from select_userinfo;
+
+insert into select_userinfo (name,age) values ('first',55);
+insert into select_userinfo (name,age) values ('third',66);
+
+##2-2
+-- 1. 전체 데이터 검색
+select * from select_userinfo;
+-- 2. 부분 검색
+select name,age from select_userinfo;
+-- 3. 중복 제거
+select distinct name from select_userinfo;
+-- 4. 별명
+select name as '이름',age '나이' from select_userinfo;
+-- 5. where 조건(=같다, != <> 다르다, < <= > >= )
+select * from select_userinfo where name = 'second';
+select * from select_userinfo where name != 'second';
+select * from select_userinfo where name <> 'second';
+
+select * from select_userinfo where age<33;
+select * from select_userinfo where age<=33;
+select * from select_userinfo where age>33;
+select * from select_userinfo where age>=33;
+-- 6. 모든 조건 - and, between and / 조건중에 - or, in 
+select * from select_userinfo where age>=22 and age<=33;
+select * from select_userinfo where age between 22 and 33;
+
+select * from select_userinfo where age<22 or age>33;
+select * from select_userinfo where age not between 22 and 33;
+
+select * from select_userinfo where age=22 or age=33;
+select * from select_userinfo where age in(22,33);
+
+select * from select_userinfo where age not in(22,33);
+
+-- 7. null 검색 ( is null, is not null, not in, not between)
+desc select_userinfo;
+alter table select_userinfo modify age int null;
+insert into select_userinfo (name)values('seven');
+select*from select_userinfo;
+
+## null 값이 비워있다라는 상태
+select * from select_userinfo where age=null; -- (X)
+select * from select_userinfo where age!=null; -- (X)
+
+select * from select_userinfo where age is null;
+select * from select_userinfo where age is not null;
+
+-- 8. like 문자열 검색( like 'a%', '%a', '%a%', '_a%')
+select * from select_userinfo where name = 'first';
+select * from select_userinfo where name like 'f%'; -- f로 시작
+select * from select_userinfo where name like '%t'; -- t로 끝남
+select * from select_userinfo where name like '%i%'; -- i포함
+select * from select_userinfo where name like '_e%'; -- 두번째 글자가 e
+
+## 연습문제
+create table select_emp select * from emp;
+desc select_emp;
+#[001]~#[010]
+select * from select_emp; 
+alter table select_emp rename column nodept to deptno; -- 1
+select * from select_emp where dept = 30; -- 2
+select * from select_emp where deptno = 30 and job='SALESMAN'; -- 3
+select* from select_emp where deptno=30 or job='check'; -- 4
+select * from select_emp where sal*12=36000; -- 5
+select * from select_emp where sal>=3000; -- 6
+select * from select_emp where  ename >='F'; -- 7
+select * from select_emp where  ename <='FORD'; -- 8
+select * from select_emp where  sal != 3000; -- 9
+select * from select_emp where  sal <> 3000; -- 10
+
+#[011]~#[020]
+select * from select_emp where not sal= 3000; -- 11
+select * from select_emp where job='MANAGER' or job='SALESMAN' or job= 'CLERK'; -- 12
+select * from select_emp where job in('MANAGER','SALESMAN','CLERK'); -- 13
+select * from select_emp where job!='MANAGER' and job!='SALESMAN' and job!= 'CLERK'; -- 14
+select * from select_emp where job not in('MANAGER','SALESMAN','CLERK'); -- 15
+select * from select_emp where sal>=2000 and sal<=3000; -- 16
+select * from select_emp where sal  between 2000 and 3000; -- 17
+select * from select_emp where sal not between 2000 and 3000; -- 18
+select * from select_emp where not ( sal>=2000 and sal<=3000); -- 19
+select * from select_emp where empno=7499 and deptno =30; -- 20
+
+#[021]~#[030]
+select * from select_emp where deptno =20 or job = 'SALESMAN'; -- 21
+select * from select_emp where sal>=2500 and job='ANALYST'; -- 22
+select * from select_emp where deptno in (10,20); -- 23
+select * from select_emp where deptno not in (10,20); -- 24
+select * from select_emp where ename like 'S%'; -- 25
+select * from select_emp where ename like '_L%'; -- 26
+select * from select_emp where ename like '%AM%'; -- 27
+select * from select_emp where ename not like '%AM%'; -- 28
+select ename as 'ENAME',sal 'SAL' ,sal*12+comm 'ANNSAL', comm 'COMM' from select_emp where ENAME in ('JAMES','ADAMS'); -- 29
+select * from select_emp where comm is null; -- 30
+
+#[031]~#[040]
+select * from select_emp where comm is null; -- 31
+select * from select_emp where mgr is not null; -- 32
+select * from select_emp where sal >null; -- 33
+select * from select_emp where sal >null or comm is null; -- 34
+select * from select_emp where ename like '%S'; -- 35
+select empno,ename,job,sal,deptno
+from select_emp
+where deptno=30 and job='SALESMAN'; -- 36
+select empno,ename,job,sal
+from select_emp
+where deptno in (20,30) and sal>2000; -- 37
+select * from select_emp where sal<2000 or sal>3000; -- 38
+select * from select_emp where deptno=30 and ename like '%E%' and sal not between 1000 and 2000; -- 39
+select * from select_emp where comm is null and mgr is not null and job in('MANAGER','CLERK') and ename not like '_L%'; -- 40
