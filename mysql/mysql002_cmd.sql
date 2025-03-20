@@ -276,3 +276,230 @@ where deptno in (20,30) and sal>2000; -- 37
 select * from select_emp where sal<2000 or sal>3000; -- 38
 select * from select_emp where deptno=30 and ename like '%E%' and sal not between 1000 and 2000; -- 39
 select * from select_emp where comm is null and mgr is not null and job in('MANAGER','CLERK') and ename not like '_L%'; -- 40
+
+
+## 복습문제
+use mbasic;
+select * from emp;
+select * from emp where ename like '%E%' and sal between 1000 and 2000;
+select * from emp where comm is null and mgr is not null and job in('MANAGER','CLERK') and ename not like '_L%'; 
+
+show tables;
+select * from select_userinfo;
+delete from select_userinfo where no=7;
+
+
+## ■ 1. order by + limit
+/*  
+select   필드1, 필드2
+from     테이블명
+where    조건식 
+group by  그룹핑
+having    조건식
+order by 기준필드  [asc(1,2,3오름차순) | desc(3,2,1 내림차순)]
+limit    몇개
+
+avg(컬럼명) 평균, max 최대값, min 최소값 , sum 합계 , count 갯수
+
+*/
+-- 1-2. 정렬
+select * from select_userinfo order by age desc; -- 내림
+select * from select_userinfo order by age asc; -- 오름
+
+-- 나이많은 3명
+select * from select_userinfo order by age desc limit 3;
+select * from select_userinfo order by age desc limit 2;
+
+-- no가 높은순으로 4명
+select * from select_userinfo order by no desc limit 4;
+
+-- no가 두번째로 높은순으로 2명 limit 어디서부터,몇개
+select * from select_userinfo order by no desc limit 0,2; -- 6,5
+select * from select_userinfo order by no desc limit 1,2; -- 5,4
+
+-- 1-3 연습문제 select_emp
+select * from select_emp where job='SALESMAN';-- 2
+select ename,mgr,sal -- 3
+from select_emp;-- 4
+select ename,mgr,sal
+from select_emp
+where job='SALESMAN'; -- 5
+select * from select_emp order by sal desc; -- 6
+select ename,sal,empo 'select_empo'
+from select_emp
+where sal>2000
+order by select_emp desc; -- 7
+select distinct  job from select_emp; -- 8
+select empno as '사원번호' ,ename '이름',job '담당업무' from select_emp; -- 9
+select* from select_emp order by sal asc; -- 10
+select* from select_emp order by sal desc; -- 11
+select* from select_emp order by deptno asc, sal desc; -- 12
+select empno 'select_employee_no',ename'select_employee_name',job
+,mgr 'MANAGER',hiredate,sal 'SALARY', comm'COMMISION', deptno 'DEPARTMENT_NO'
+from  select_emp
+order by deptno desc, ename asc; -- 13
+
+create table group_user(
+no int not null primary key auto_increment,
+name varchar(20) not null,
+age int not null,
+sex char(2),
+kor int,
+eng int,
+math int,
+ban char(2),
+sns char(2));
+
+select * from group_user;
+desc group_user;
+alter table group_user modify sns char(2) default 'y';
+
+insert into group_user values(1,'first',11,null,100,100,99,'A','n');
+update group_user set kor = 100 where no=1;
+insert into group_user values(2,'second',22,'m',89,92,78,'B','n');
+update group_user set sns = 'y' where no=2;
+insert into group_user values(3,'third',33,'m',90,92,97,'A','y');
+
+insert into group_user values(4,'fouth',44,'f',40,42,67,'C','n');
+insert into group_user values(5,'fifth',55,'f',89,86,99,'B','y');
+insert into group_user values(6,'sixth',66,'m',10,20,44,'C','n');
+
+alter table group_user rename group_userinfo;
+
+-- 2-2 기본
+select  @@sql_mode; -- 2
+set  SESSION  sql_mode='STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
+
+select * from group_userinfo group by ban; -- 4
+
+-- 나이평균
+select avg(age) from group_userinfo;
+
+-- 반별 몇명있는지
+select * from group_userinfo;
+select ban, count(*) from group_userinfo group by ban;
+
+-- 반별 국, 영, 수의 총점 확인
+select ban, sum(kor) '국어총합',sum(eng) '영어총합',sum(math) '수학총합' 
+from group_userinfo
+group by ban;
+
+-- 반별 국,영,수의 평균 확인
+select ban, avg(kor) '국어 평균',avg(eng) '영어 평균' ,avg(math)'수학 평균'
+from group_userinfo
+group by ban;
+
+-- 반별 나이의 총합과 나이 평균 확인 alter
+select ban, sum(age) '나이총합', avg(age) '나이평균',max(age)'최고나이', min(age)'최저나이'
+from group_userinfo
+group by ban;
+
+select ban, avg(kor) '국어 평균'
+from group_userinfo
+group by ban
+having avg(kor)>=89;
+
+select ban, sum(age) '나이총합', avg(age) '나이평균'
+from group_userinfo
+group by ban
+having avg(age) >=35
+order by avg(age) desc;
+
+desc emp;
+alter table emp change dept deptno int;
+select * from emp;
+select sum(sal) '급여합계'
+from emp;
+select sum(comm) '추가수당'
+from emp;
+select sum(distinct sal) 'sum(distinct sal)', sum(all sal) 'sum(all sal)', sum(sal) 'sum(sal)'
+from emp;
+select count(empno);
+
+select count(deptno) '부서직원수'
+from emp 
+group by deptno
+having deptno=30;
+select count(distinct sal) 'count(distinct sal)',count(all sal) '(all sal)', count(sal) 'count(sal)'
+from emp;
+select count(comm) '추가수당을 받는 사원수'
+from emp;
+select count(*) '추가수당을 받는 사원수'
+from emp
+where comm is not null;
+select max(sal)'부서 10 최대급여' from emp where deptno=10;
+select min(sal)'부서 10 최소급여' from emp where deptno=10;
+
+select hiredate '부서 20 최근입사일' 
+from emp 
+where deptno=20
+order by hiredate desc limit 1;
+
+select hiredate '부서 20 제일 오래된 입사일' 
+from emp 
+where deptno=20
+order by hiredate asc limit 1;
+
+select avg(sal)
+from emp
+where deptno = 30;
+
+select avg(distinct sal)
+from emp
+where deptno = 30;
+
+select deptno,avg(sal)'평균급여'
+from emp
+group by deptno
+order by deptno asc;
+
+select deptno,job,avg(sal)'평균급여'
+from emp
+group by mgr,deptno
+order by deptno asc ,job asc;
+
+select deptno,job,avg(sal)'평균급여'
+from emp
+group by deptno,job
+having avg(sal)>2000
+order by deptno asc ;
+
+select deptno,job,avg(sal)
+from emp
+where avg(sal)>=2000 -- 오류남 
+group by deptno,job
+order by deptno,job;
+
+select deptno,job,avg(sal)'평균급여'
+from emp
+where sal<=3000
+group by deptno,job
+having avg(sal)>=2000
+order by deptno asc ;
+select*from emp;
+
+select deptno,job,count(deptno) '사원수',max(sal),sum(sal)'급여함',avg(sal)'평균급여'
+from emp
+group by deptno,job
+order by deptno asc;
+
+create table milk_order(
+ono int not null primary key auto_increment,
+oname varchar(20) not null,
+onum int not null,
+odate datetime default current_timestamp,
+oip varchar(100) not null 
+);
+desc milk_order;
+select *from milk_order;
+
+-- Q1.  milk_order 값삽입.  insert 구문 완성    (oname, onum, oip)     'white' , 2,  '127.0.0.1'
+insert into milk_order (oname,onum,oip)values('white',2,'127.0.0.1');
+-- Q2.  milk_order no가 1인데이터 조회 
+select * from milk_order where ono=1;
+-- Q3.  milk_order 전체데이터조회
+select *from milk_order;
+-- Q4.  milk_order 해당번호의 이름과 갯수 수정
+update milk_order set oname='choco' where ono=1;
+-- Q5.  milk_order 해당번호의 데이터 삭제
+delete from milk_order where ono=1;
