@@ -503,3 +503,30 @@ select *from milk_order;
 update milk_order set oname='choco' where ono=1;
 -- Q5.  milk_order 해당번호의 데이터 삭제
 delete from milk_order where ono=1;
+
+use mbasic;
+SELECT CEIL(1.1), FLOOR(1.9), ROUND(1.5), MOD(10,3);
+select 123.4578,
+round(123.4578,0) 'ROUND1',
+round(123.4578,-1) 'ROUND2',
+round(123.4578,1) 'ROUND3',
+round(123.4578,2) 'ROUND4';
+select 123.4578,
+ceil(123.4578) 'CEIL',
+floor(123.4578) 'FLOOR';
+
+select length('abc') 'LENGTH';
+select 'ABC' 'DEFAULT',
+upper('abc') 's1',
+lower('ABC') 's2';
+
+select instr('abc','b') 'b의 위치',
+instr('abc','ab') 'ab의 위치',
+instr('abc','ac') 'ac의 위치';
+
+select left('abc',1) 'l1',
+left('abc',2) '12',
+right('abc',1)'r1',
+right('abc',2)'r2';
+
+select substr('abcde',2,2)

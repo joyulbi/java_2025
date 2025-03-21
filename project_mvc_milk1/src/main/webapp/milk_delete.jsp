@@ -27,10 +27,8 @@
         pstmt = conn.prepareStatement(sql);
         pstmt.setInt(1, ono); // 사용자가 입력한 주문번호 설정
 
-        // 6. DELETE 실행
-        int rowsDeleted = pstmt.executeUpdate();
-
-        if (rowsDeleted > 0) {
+        // 6. DELETE 실행    
+        if (pstmt.executeUpdate() > 0) {
             out.println("<script>alert('주문이 삭제되었습니다.'); location.href='milk.jsp';</script>");
         } else {
             out.println("<script>alert('삭제할 주문을 찾을 수 없습니다.'); location.href='milk.jsp';</script>");
