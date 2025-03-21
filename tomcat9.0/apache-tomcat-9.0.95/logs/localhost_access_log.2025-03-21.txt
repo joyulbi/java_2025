@@ -515,3 +515,7 @@
 0:0:0:0:0:0:0:1 - - [21/Mar/2025:18:00:10 +0900] "POST /jsp_basic/web016_js_fn_useful.html HTTP/1.1" 200 4722
 0:0:0:0:0:0:0:1 - - [21/Mar/2025:18:00:17 +0900] "POST /jsp_basic/web016_js_fn_useful.html HTTP/1.1" 200 4722
 0:0:0:0:0:0:0:1 - - [21/Mar/2025:18:01:20 +0900] "GET /project_mvc_milk1/milk.jsp HTTP/1.1" 200 6383
+0:0:0:0:0:0:0:1 - - [21/Mar/2025:18:07:31 +0900] "POST /project_mvc_milk1/milk_insert.jsp HTTP/1.1" 500 2765
+0:0:0:0:0:0:0:1 - - [21/Mar/2025:18:07:38 +0900] "GET /project_mvc_milk1/milk.jsp HTTP/1.1" 200 6383
+0:0:0:0:0:0:0:1 - - [21/Mar/2025:18:07:43 +0900] "POST /project_mvc_milk1/milk_insert.jsp HTTP/1.1" 200 136
+0:0:0:0:0:0:0:1 - - [21/Mar/2025:18:07:44 +0900] "GET /project_mvc_milk1/milk.jsp HTTP/1.1" 200 6457
