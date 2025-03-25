@@ -30,7 +30,7 @@
 		<form action="jsp008_result.jsp" method="get">
 		  <div class="my-3">
 		    <label for="email" class="form-label">Email : </label>
-		    <input type="emial" class="form-control" id="email"
+		    <input type="email" class="form-control" id="email"
 		           name="email"/>
 		  </div>
 		  <div class="my-3">
