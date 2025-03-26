@@ -1,3 +1,6 @@
+<%@page import="java.sql.Connection"%>
+<%@page import="javax.sql.*"%>
+<%@page import="javax.naming.*"%>
 <%@page import="java.net.InetAddress"%>
 <%@page import="java.sql.*"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -13,6 +16,18 @@
 </head>
 
 <body>
+
+<%
+  // DataSource JNDI 연결 (공통으로 사용하도록 설정)
+  Context initContext = new InitialContext();
+  Context envContext  = (Context)initContext.lookup("java:/comp/env");
+  DataSource ds = (DataSource)envContext.lookup("jdbc/mbasic");
+  Connection conn1 = ds.getConnection();
+  if(conn1!=null){out.println("연동성공!");}
+%>
+
+
+
 <div class="p-5 bg-danger text-white">
   <h1>MILK ORDER Project</h1>
   <p>PreparedStatement Ex</p>
@@ -222,12 +237,3 @@
 </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-

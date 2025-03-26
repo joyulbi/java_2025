@@ -51,14 +51,91 @@ https://www.google.com/search?q=apple&name=yulbi
 - request.getParameter("q")
 
 
+■ 3. 내장객체
+1. requeset ( 요청 )
+ - request.getParameter("name"); 값 한개
+ - request.getParameterValues("name"); 값 여러개 - checkbox
+
+2. response ( 응답 )
+ - response.sendRedirect("처리경로"); 
+   * response/request가 유지가 안됨.
+   * 같은 처리 alert 출력안됨.
+   ※ location.href / meta http-equiv='refresh' content='초; url=경로'
+
+ - request.getRequestDispatcher("경로").forward(request,response);
+   * 요청과 응답 위임
+   * response/request가 유지가 안됨.
+
+3. scope 범위
+   [ application(애플리케이션) > session(브라우저) > request(요청) > pageContext(페이지) ]
+
+4. session
+ - http 프로토콜 (데이터요청 - 응답을 받게 되면 바로 종료)
+ - 서버측에 저장되는 정보
+ - 보안이 좋음
+
+5. cookie
+ - 클라이언트 측에 저장되는 정보
+ - 보안상에 취약
+ 
+6. error
+ - 4xx (클라이언트 측 오류), 5xx (서버측에 오류)
+ - 404 페이지 찾을 수 없음, 500 자바 코드상에 오류
+ - web.xml 에러설정
+
+7. out
+ - 출력
 
 
+■ 4. mvc1 vs mvc2
+1. MVC
+ - 서로 영향없이쉽게 고칠 수 있는 애플리케이션
+ - M : model 애플리케이션의 정보 ( db정보, dto, dao, 비즈닉스 login 포함 )
+ - V : view 사용자가 사용하는 화면
+ - C : controller model과 view사이의 상호작용 관리
+
+2. mvc1 vs mvc2
+ - mvc1 - controller역할을 jsp가 담당
+ - mvc2 - controller역할을 servlet이 담당
 
 
+■ 5. dbcp
+1. dbcp
+ - 분산응용프로그램
+
+2. 실습
+
+1) 다운로드 
+	https://commons.apache.org - [commons]- dbcp,pool,collections
+	https://commons.apache.org/downloads/
+2) [WEP-INF] - [lib] - JAR
+3) DBCP - JAVA 파일 만들기
+   https://tomcat.apache.org/
+
+■ server.xml
+<Context>
+  <Resource name="jdbc/mbasic" auth="Container" 
+	   type="javax.sql.DataSource"
+               maxTotal="100" maxIdle="30" maxWaitMillis="10000"
+               username="root" password="1234"
+	   driverClassName="com.mysql.cj.jdbc.Driver"
+               url="jdbc:mysql://localhost:3306/mbasic"/>
+</Context>
+
+■ web.xml
+  <resource-ref>
+      <description>DB Connection</description>
+      <res-ref-name>jdbc/TestDB</res-ref-name>
+      <res-type>javax.sql.DataSource</res-type>
+      <res-auth>Container</res-auth>
+  </resource-ref>
 
 
-
-
+■ DBCP연동
+Context initContext = new InitialContext();
+Context envContext  = (Context)initContext.lookup("java:/comp/env");
+DataSource ds = (DataSource)envContext.lookup("jdbc/myoracle");
+Connection conn = ds.getConnection();
 
 
 

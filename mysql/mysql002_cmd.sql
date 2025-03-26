@@ -1154,3 +1154,12 @@ where exists (select dname from dept where deptno = 50);
 select * from emp e
 where sal in(select max(sal) from emp where deptno=e.deptno );
 -- (19)
+use mbasic;
+create table member(
+no int not null primary key auto_increment,
+name varchar(100) not null,
+pass varchar(50) not null);
+insert into member values(1,'first',11);
+insert into member values(2,'second',22);
+insert into member values(3,'third',33);
+insert into member values(4,'fourth',44);

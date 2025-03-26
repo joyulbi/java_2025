@@ -162,7 +162,23 @@
              Note: The pattern used is equivalent to using pattern="common" -->
         <Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs" pattern="%h %l %u %t &quot;%r&quot; %s %b" prefix="localhost_access_log" suffix=".txt"/>
 
-      <Context docBase="jsp_basic" path="/jsp_basic" reloadable="true" source="org.eclipse.jst.jee.server:jsp_basic"/><Context docBase="project_mvc_milk1" path="/project_mvc_milk1" reloadable="true" source="org.eclipse.jst.jee.server:project_mvc_milk1"/></Host>
+	<Context docBase="jsp_basic" path="/jsp_basic"
+		reloadable="true" source="org.eclipse.jst.jee.server:jsp_basic" >
+		<Resource name="jdbc/mbasic" auth="Container"
+			type="javax.sql.DataSource" maxTotal="100" maxIdle="30"
+			maxWaitMillis="10000" username="root" password="1234"
+			driverClassName="com.mysql.cj.jdbc.Driver"
+			url="jdbc:mysql://localhost:3306/mbasic" />
+	</Context>
+	<Context docBase="project_mvc_milk1" path="/project_mvc_milk1"
+		reloadable="true"
+		source="org.eclipse.jst.jee.server:project_mvc_milk1" >
+		<Resource name="jdbc/mbasic" auth="Container"
+			type="javax.sql.DataSource" maxTotal="100" maxIdle="30"
+			maxWaitMillis="10000" username="root" password="1234"
+			driverClassName="com.mysql.cj.jdbc.Driver"
+			url="jdbc:mysql://localhost:3306/mbasic" />
+	</Context></Host>
     </Engine>
   </Service>
 </Server>
