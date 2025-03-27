@@ -1163,3 +1163,17 @@ insert into member values(1,'first',11);
 insert into member values(2,'second',22);
 insert into member values(3,'third',33);
 insert into member values(4,'fourth',44);
+
+use mbasic;
+select*from member;
+delete from member where no=17;
+
+use mbasic;
+create table board(
+bno	int not null auto_increment primary key,
+btitle varchar(1000) not null,
+bcontent text not null,
+bname varchar(100) not null,
+bit timestamp default 0,
+bdate int not null default 'current_timestamp',
+bip varchar(100) not null);

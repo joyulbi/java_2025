@@ -1,0 +1,111 @@
+Q1. mvc란
+- 서로 영향없이 쉽게 고칠 수 있는 애플리케이션
+- m : model
+- v : view
+- c : controller
+
+Q2. mvc1 vs mvc2
+- mvc1 : controller 역할을 jsp 담당, 스파게티소스
+- mvc2 : controller 역할을 servlet이 담당
+
+Q3. DBCP란?
+- 분산응용프로그램
+- db 커넥션 객체를 미리 (pool)에 생성해두고 사용
+- 데이터베이스 과부하 줄이기
+
+Q4. jsp ( java ) + ( html )
+     mvc에서의 역할은? view
+
+Q5. servlet은 ( java )
+     mvc에서의 역할은? controller
+
+Q6. DBCP를 설정하는 방법을 설명하시오.
+1. jar 3개 다운로드 - dbcp, collections, pool
+2. Server - [server.xml] pool 설정
+3. 진행프로젝트 - [weapp]
+4. test
+
+Q7. dynamic web project에서
+ jsp가 위치하는 영역은 ( webapp ),
+ servlet이 위치하는 영역은 ( Java Resourse), 
+ 라이브러리들 .jar파일들이 들어가는 위치는 ( [WEB-INF]-lib )
+
+Q8. request가 오면 ( [WEB-INF] - web.xml ) 파일을 참고해서 controller을 찾는다.
+
+Q9. 로그인 후 id를 유지하려고 하면 ( session )을 이용한다
+     셋팅이름은 username, 값은 name변수로 지정하시오.
+     session.setAttribute("username",name);
+
+Q10. application scope의 범위를 적으시오.
+       application > session > request > pageContext
+
+
+■ PART002
+#1. frontcontroller board 게시판 완성
+#2. 개발사이트 api + ajax
+#3. [숙제] - api 2개 이상 / upgrade 기능 업그레이드
+
+
+
+
+1) dynamic web project - JOAbooks
+2) inc - header/footer
+3) error page 성정 - 404, 500
+4) dbcp 연동
+
+
+
+PROJECT (2) MODEL
+DB : table명 - board
+글번호 	  bno	  int		not null	auto_increment    PK
+글 제목	  btitle	  varchar(1000)	not null
+글 내용 	  bcontent text		not null
+글쓴이 	  bname	  varchar(100)	not null
+조회수 	  bit	  int			default 0
+글 쓴 날짜 bdate  	  timestamp	not null	default current_timestamp
+아이피 	  bip	  varchar(100)	not null
+
+--글 비밀번호 bpass
+
+
+
+
+Dto : [com.company.domain] - BoardVO 
+DBManager : [com.company.dbmanager] - DBManager
+Dao : [com.company.dao]	 - BoardDao 
+...........................................................................................................
+참고1)
+ executeQuery - select
+ executeUpdate - insert, update, delete ( 실행줄수 )
+
+참고2)
+ 리턴값 메서드명() {}
+
+ 1. 글쓰기         - insert into board( btitle, bcontent, bname, bip ) values ( ?,?,?,? )
+    public int insert( BoardVO vo ){ return 0; }
+
+ 2. 최신글읽기    - select * from board order by bno desc
+    public ArrayList<BoardVO> selectAll( ){ return null; }
+  
+ 3. 해당글읽기/해당글 수정폼 - select * from board where bno=?
+    public BoardVO select( int bno ){ return null; }
+
+ 4. 조회수증가    - update board set bhit = bhit + 1 where bno=?
+    public int updateHit( int bno ) { return 0; }
+
+ 5. 해당글수정    - update board set btitle=?,bcontent=? where bno=?
+    public int update( BoardVO vo ){ return 0; }
+
+ 6. 해당글삭제    - delete from board where bno=?
+    public int delete( int bno ){ return 0; }
+
+
+
+
+
+
+
+
+
+
+
