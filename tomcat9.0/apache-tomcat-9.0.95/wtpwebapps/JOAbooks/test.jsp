@@ -44,7 +44,7 @@
 	//6. delete
 	System.out.println(dao.delete(9));
 	System.out.println(dao.select(9));
-	//5. update
+	//5. update 기능
 	/*BoardVO vo = new BoardVO();
 	vo.setBtitle("제목-new");
 	vo.setBcontent("내용-new");

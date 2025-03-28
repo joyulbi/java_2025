@@ -142,6 +142,7 @@ public class BoardDao {
 			pstmt.setString(1, vo.getBtitle());
 			pstmt.setString(2, vo.getBcontent());
 			pstmt.setInt(3, vo.getBno());
+			result=pstmt.executeUpdate();
 		} catch (SQLException e) {  e.printStackTrace();
 		} finally {
 			//if(rset != null) {try {rset.close();}catch(SQLException e) {e.printStackTrace();}}
