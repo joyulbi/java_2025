@@ -53,6 +53,38 @@
 	</script>
 </div>
 
+
+	<h3>NAVER NEWS</h3>
+	<div class="news-result"></div>
+
+	<script>
+	// 뉴스 데이터 불러오기
+	$.ajax({
+		url: "${pageContext.request.contextPath}/news",
+		dataType: "json",
+		type: "GET",
+		success: function(json) {
+			let items = json.items;
+
+			for(let i = 0; i < items.length; i++) {
+				let div = $('<div class="card my-3">');
+				let cardBody = $('<div class="card-body">');
+
+				let title = $('<h5>').html('<a href="' + items[i].link + '" target="_blank">' + items[i].title.replace(/<[^>]*>/g, '') + '</a>');
+				let desc = $('<p>').html(items[i].description.replace(/<[^>]*>/g, ''));
+				let origin = $('<p class="text-muted small">').text("출처: " + items[i].originallink);
+
+				cardBody.append(title).append(desc).append(origin);
+				div.append(cardBody);
+				$(".news-result").append(div);
+			}
+		},
+		error: function(xhr, textStatus, errorThrown) {
+			$(".news-result").html(textStatus + " (HTTP-" + xhr.status + "/" + errorThrown + ")");
+		}
+	});
+	</script>
+
 <div class="container my-5">
 	<h3>MULTIBOARD</h3>
 	<%-- <%=request.getAttribute("list") %> --%>

@@ -91,10 +91,8 @@ public class FrontController extends HttpServlet {
 			String result = (String)request.getAttribute("result");
 			String msg = "관리자에게 문의바랍니다.";
 			if(result.equals("1")) { msg="글삭제에 성공했습니다!";  }
-			
 			out.println("<script> alert('"+msg+"');   location.href='list.do'; </script>");
 		}
-		
 	}
 }
 
