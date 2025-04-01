@@ -1,4 +1,4 @@
-1. SPRING
+ 1. SPRING
 --------------------------------------------
 #1. SPRING?
 --------------------------------------------
@@ -242,6 +242,102 @@ public class AnimalFarm2 {
  5. build path - Classpath - add Libraries - JUnit 4 [spring project 1]
 --
  6. pom.xml 셋팅 > juni, context, spring-test        [spring project 2]
+
+
+
+---------------------------------
+#4. DB / MYBATIS
+---------------------------------
+▶1. DataSource
+ SimpleDriverDataSouce 가장 단순 버젼
+ - getConnection() 매번생성
+
+> mysql-connector-java / spring-jdbc
+<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+<dependency>
+    <groupId>mysql</groupId>
+    <artifactId>mysql-connector-java</artifactId>
+    <version>8.0.28</version>
+</dependency>
+<!-- https://mvnrepository.com/artifact/org.springframework/spring-jdbc -->
+<dependency>
+    <groupId>org.springframework</groupId>
+    <artifactId>spring-jdbc</artifactId>
+    <version>4.3.20.RELEASE</version>
+</dependency>
+
+
+▶2. Mybatis 
+1. sql을 별도로 파일분리해서 관리
+2. ORM( object relational mapping ) 프레임워크
+3. mybatis
+====================
+SqlSessionFactoryBean
+	↓
+SqlSessionFactoryBean → <<SqlSession>> → mapper.xml
+			(insert, update, delete, select,,,)
+※ SqlSessionFactory SqlSession 생성관리
+※ SqlSession : sql실행, 트랜잭션
+=====================
+
+4. 실습 
+ mybatis
+ mybatis-spring
+ 
+   <!-- https://mvnrepository.com/artifact/org.mybatis/mybatis -->
+   <dependency>
+       <groupId>org.mybatis</groupId>
+       <artifactId>mybatis</artifactId>
+       <version>3.5.6</version>
+   </dependency>
+   <!-- https://mvnrepository.com/artifact/org.mybatis/mybatis-spring -->
+   <dependency>
+       <groupId>org.mybatis</groupId>
+       <artifactId>mybatis-spring</artifactId>
+       <version>2.0.6</version>
+   </dependency>
+
+
+5. 설정파일
+   ## mapper 설정파일(1)
+   [Preferences] - [Xml] - Templates - New - New XML
+   <?xml version="1.0" encoding="UTF-8" ?>
+   <!DOCTYPE mapper
+     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+     "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+   <mapper namespace="org.mybatis.example.BlogMapper">
+   </mapper>
+   
+   ## mapper 설정파일(2)  
+   [Preferences] - [Xml] - Templates - New - New XML
+   <?xml version="1.0" encoding="UTF-8" ?>
+   <!DOCTYPE configuration
+     PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+     "https://mybatis.org/dtd/mybatis-3-config.dtd">
+   <configuration>
+   </configuration>
+
+
+insert	:	insert into userinfo(name,age) values(?,?)
+select	:	select * from userinfo where no=?
+			select * from userinfo
+update	:	update userinfo set name=?,age=? where no=?
+delete	:	delete from userinfo where no=? 
+
+
+7-2. Dto (User Dto)
+ * [com.company.dto] - UserDto
+ private int no;
+ private String name;
+ private int age;
+
+ //생성자, tostring, getters/setters
+
+ * [config] - mybatis-config.xml mapper에서 사용할 UserDto 등록
+
+7-3. Dao ( UserDao, UserDaoImpl, user-mapper.xml )
+
+
 
 
 

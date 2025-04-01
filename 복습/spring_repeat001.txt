@@ -1,0 +1,49 @@
+Q1. 프레임 워크
+ - 소프트웨어 개발의 뼈대 [ 디자인 패턴 + 라이브러리 ]
+
+Q2. IOC
+ - 인스턴스생성 ~소멸까지 생명주기를 스프링이 관리
+
+Q3. DI
+ - 각 클래스의 의존관계를 [ 설정 파일 ]을 통해서 컨테이너가 자동연결
+
+Q4. BEAN
+ - 스프링이 관리하는 객체
+
+Q5. 스프링에서 다음에 해당하는 설정파일을 작성하시오
+----------------------------------------------------------------------
+5-1. <bean id="cat" class="test.Cat"/>
+
+5-2. <bean id="dog" class="test.Dog"/>
+
+5-3. <bean id="animalFarm " class="test.AnimalFarm"/>
+	<property name = "name" value="sally" />
+	<property name = "ani" ref="cat" />
+        <bean/>
+-----------------------------------------------------------------------
+
+Q6. 스프링에서 다음에 해당하는 설정파일을 작성하시오
+----------------------------------------------------------------------
+6-1. <bean id="cat" class="test.Cat"/>
+
+6-2. <bean id="dog" class="test.Dog"/>
+
+6-3. <bean id="animalFarm " class="test.AnimalFarm"/>
+	<constructor-arg index="0" value="alpha"/>
+	<constructor-arg index="1" ref="dog"/>
+        <bean/>
+-----------------------------------------------------------------------
+
+Q7. 설정파일에 @Annotation을 이용하여 bean을 사용하려고 한다.
+7-1. 각 클래스에 붙여야 할 것은? ( @Component )
+			@Controller, @Repository, @Service
+7-2. 설정파일에는 ( <context:component-scan base-package=""/> )
+
+
+
+
+
+
+
+
+
