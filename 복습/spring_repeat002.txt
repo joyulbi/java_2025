@@ -1,0 +1,16 @@
+Q1. [spring test] SPRING에서 JunitTest를 하려고 한다  
+pom에서 다운로드 받을때 필요한 것은? (junit , spring-context, spring-test   )  
+Q2. [mysql 연동] SPRING에서 MYSQL을 연동하려고 한다  
+pom에서 다운로드 받을때 필요한 것은? (mysql-connector-java , spring-jdbc  )  
+Q3. [mybatis 연동] spring에서 mybatis를 사용하려고 한다.  
+pom에서 다운로드 받을때 필요한 것은? ( mybatis ,  mybatis-spring  )  
+Q4. root-context.xml 에서 DataSource를 연동하려고 한다. 필요한 클래스이름은?  
+
+Q5. 위의 클래스에서 Setter를 이용하여 Property를 지정하려고한다.  
+Property 이름을 적으시오. (   driverClass   , url , username , password)  
+Q6. mybatis의 (  sqlSessionFactory   )는 sqlSession을 생성 및 관리 , (  sqlSession  ) 은 sql을 실행한다.  
+Q7. 다음을 작성하시오.  
+7-1. spring project - spring006_mybatis2만들기  
+7-2. Datasource를 설정하고 db.properties를 이용하여 datasource를 연동하시오 > SimpleDriverDataSource  
+7-3. Mybatis를 셋팅하고 다음 테이블의 crud를 테스트하시오.  
+select now()

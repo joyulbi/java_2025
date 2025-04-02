@@ -339,10 +339,138 @@ delete	:	delete from userinfo where no=?
 
 
 
+▶3.  Mybatis  ex
+    1. dynamic web project - spring005_ex_board
+    2. configure  - [Convert to Maven Project]
+    3. spring      - add Spring project Nature
+    4. java se-11 / project facts, build path
+    5. build path - add Libraries - JUnit 4       
+    6. pom.xml 셋팅   > junit, context, spring-test      ■[프로젝트만들기]
+
+Q1. spring project spring005_ex_board만들기
+Q2. Datasource를 셋팅하고 
+     db.properties를 이용하여   datasource를 연동하시오 > SimpleDriverDataSource
+Q3. Mybatis를 셋팅하고 
+     다음 테이블의 crud를 테스트하시오.
+ [com.company.dto]  - BoardDto                      mybatis-config.xml
+ [com.company.dao] - BoardDao  /  BoardDaoImpl /  board-mapper.xml 
+
+mysql> desc sboard;
++----------+---------------+------+-----+-------------------+-------------------+
+| Field    | Type          | Null | Key | Default           | Extra             |
++----------+---------------+------+-----+-------------------+-------------------+
+| bno      | int           | NO   | PRI | NULL              | auto_increment    |
+| bname    | varchar(100)  | NO   |     | NULL              |                   |
+| bpass    | varchar(50)   | NO   |     | NULL              |                   |
+| btitle   | varchar(1000) | NO   |     | NULL              |                   |
+| bcontent | text          | NO   |     | NULL              |                   |
+| bdate    | timestamp     | NO   |     | CURRENT_TIMESTAMP | DEFAULT_GENERATED |
+| bhit     | int           | NO   |     | 0                 |                   |
+| bip      | varchar(50)   | NO   |     | NULL              |                   |
++----------+---------------+------+-----+-------------------+-------------------+
+8 rows in set (0.00 sec)
 
 
 
 
+
+-----------------------------------------
+#5. DB/MYBATIS (2)
+-----------------------------------------
+▶1.  mybatis (1)
+- TestDao, Impl, mapper.xml 의 파일량줄이기
+-  SqlSession sqlSession , namespace="com.company.dao.TestDao" 코드안에 있어서 불편, 설정파일설정
+TestDao <<interface>>
+    ↑   
+TestDaoImpl <<class>>
+====================
+   @Repository
+   public class TestDaoImpl implements TestDao{
+      @Autowired  private SqlSession sqlSession;  //sql 실행
+      ivate static final String namespace="com.company.dao.TestDao";   ... 코드생략
+   }
+====================
+test-mapper.xml
+
+
+
+▶2.  mybatis (2)
+- root-context.xml 설정파일
+before:  구현클래스 삭제 - 구현클래스 없애고...안에있는 설정을
+	@Autowired  private SqlSession sqlSession;  //sql 실행
+	ivate static final String namespace="com.company.dao.TestDao";
+
+after:
+	<bean id ="" class="MapperFactoryBean">
+	</bean>
+
+
+1. 006_1 mybatis 프로젝트 복사
+2. 006_2 mybatis 프로젝트 복사 - Impl 구현클래스 삭제 / root-context 수정
+
+
+
+▶3. mybatis (3)
+- MapperFactoryBean 매번 설정이 힘듦. 모든 mapper에 설정하기 힘듦 
+
+- 해결방안 : Ma
+
+
+
+
+
+-----------------------------------------
+#6. mvc project
+-----------------------------------------
+▶1. mvc
+>> 서로 영향없이 쉽게 고칠 수 있는 애플리케이션을 만들자!
+Model	- 정보( dto, dao, service )
+View 	- 화면( html, css, js/jquery )
+Controller - 처리 (요청을 받아서 처리 후 응답)
+
+
+▶2. mvc1 vs mvc2
+mvc1 - controller의 역할을 jsp 담당
+mvc1 - controller의 역할을 servlet 담당
+FrontController - 공통작업 수행 → 세부컨트롤러에 처리
+
+
+
+▶3.  SPRING MVC
+[클라이언트]
+ ↓ ① list.do
+[FrontController]
+<<DispatcherServlet>>  → 	② HandlerMapping   - @Controller
+              			↓   
+                 	           	③ 세부Controller  - db가 db처리                         
+             		     ↓↑
+			④  View
+
+
+① 클라이언트 ( 코요테 - web.xml  - root-context.xml / servlet-context.xml / DispatcherServlet)
+② DispatcherServlet   - HandlerMapping   - @Controller / 처리할 Controller 확인
+③ 세부Controller  클라이언트 요청처리 (service - 비지니스로직)
+④ 요청결과와 View정보를  DispatcherServlet 줌  / View를 개체를 생성해서 응답
+
+
+1. 실습
+1) pom.xml   spring-webmvc 등록  
+   <!-- https://mvnrepository.com/artifact/org.springframework/spring-webmvc -->
+   <dependency>
+       <groupId>org.springframework</groupId>
+       <artifactId>spring-webmvc</artifactId>
+       <version>3.2.17.RELEASE</version>
+   </dependency>
+2) web.xml   ContextLoaderListener (스프링구동)  / DispatcherServlet (Frontcontroller)
+         	root-context.xml (db설정) / servlet-context.xml (view servlet 설정)
+
+3) servlet.xml
+  4-1. @Controller 위치
+	<context:component-scan base-package="com.company.controller"/>	
+  4-2. Model model ( 처리결과 )
+	<mvc:annotation-driven/>
+  4-3. ViewResolver
+3) config/servet-context.xml 
 
 
 
