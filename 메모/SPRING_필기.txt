@@ -325,6 +325,16 @@ update	:	update userinfo set name=?,age=? where no=?
 delete	:	delete from userinfo where no=? 
 
 
+6. readTime
+
+7.
+
+insert : insert into userinfo (name, age) values (?, ?);
+select : select * from userinfo where no=?;
+          select * from userinfo;
+update : update userinfo set name=? and age=? where no=?;
+delete : delete from userinfo where no=?;
+
 7-2. Dto (User Dto)
  * [com.company.dto] - UserDto
  private int no;
@@ -410,11 +420,24 @@ after:
 
 
 
-▶3. mybatis (3)
-- MapperFactoryBean 매번 설정이 힘듦. 모든 mapper에 설정하기 힘듦 
+▶ 3. mybatis (3)
+- MapperFactoryBean 매번 설정이 힘듦. 모든 mapper에 설정하기 힘듦
 
-- 해결방안 : Ma
+- 해결방안 : MapperScannerConfigurer
+1. MyDao
+   public @interface MyDao{}
 
+2. mapper로 만들어주는 interface
+   @MyDao  public interface TestDao{}
+   @MyDao  public interface UserDao{}
+   @MyDao  pulbic interface BoardDao{}
+
+3. MyDao root-context.xml 등록
+	<!-- Step4) MapperScannerConfigurer -->
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="com.company.dao" />
+		<property name="annotationClass" value="com.company.dao.MyDao" />
+	</bean>
 
 
 
@@ -471,6 +494,61 @@ FrontController - 공통작업 수행 → 세부컨트롤러에 처리
 	<mvc:annotation-driven/>
   4-3. ViewResolver
 3) config/servet-context.xml 
+
+
+
+
+------------------------------------------
+#7. 유용한 기능들
+------------------------------------------
+1. jstl
+2. dto → lombok
+3. aop(관점지향)
+4. HikariCP (sbcp / sql 과정 다 보이게)
+5. Tx (sql 여러 개 실행 될 때 중간에 실패하면 sql 다 처리 안 되게)
+
+
+▶jstl
+1.pom.xml
+        <!-- https://mvnrepository.com/artifact/javax.servlet/jstl -->
+      <dependency>
+         <groupId>javax.servlet</groupId>
+         <artifactId>jstl</artifactId>
+         <version>1.2</version>
+      </dependency>
+
+
+
+2.Model
+- table
+- dto UserDto / mapper-config.xml
+- dao UserDao / user-mapper.xml / root-context.xla(등록)
+
+3. @Repository - Dao (sql 실행)
+   @Service - 비즈니스 로직 - 처리하는 기능
+   상세보기 : 조회수 올리는 sq l/ 해당번호 상세보기 데이터
+   수정보기 : 		     해당번호 상세보기 데이터
+   글쓰기 : 이미지올리기 /  그 이미지 이름 경로 및 데이터 insert시 저장
+
+
+------------------------------------------
+#8. restful
+------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

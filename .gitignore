@@ -1,1 +1,4 @@
 /.metadata/
+/tomcat9.0/
+/tomcat9.0/*.log
+/Servers/
