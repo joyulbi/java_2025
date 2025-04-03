@@ -1,5 +1,7 @@
 package com.company.service;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +14,16 @@ import com.company.dto.BoardDto;
 public class BoardServiceImpl implements BoardService {
 	@Autowired BoardDao dao;
 
-	@Override public int insert(BoardDto dto) {  return dao.insert(dto); }//글쓰기 기능
+	@Override public int insert(BoardDto dto) {
+
+			try {
+				dto.setBip(InetAddress.getLocalHost().getHostAddress());
+			} catch (UnknownHostException e) {
+				
+				e.printStackTrace();
+			}
+		
+		return dao.insert(dto); }//글쓰기 기능
 	@Override public int update(BoardDto dto) {  return dao.update(dto); }// 수정기능 (해당 글 번호보기)
 	@Override public BoardDto updateForm(int bno) {  return dao.select(bno); }// 해당번호 글 수정 폼
 	@Override public int delete(BoardDto dto) {  return dao.delete(dto); }// 글 삭제기능

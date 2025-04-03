@@ -27,7 +27,7 @@
 			</c:forEach>
 		</tbody>
 	</table>
-	<p  class="text-right"><a href=""   class="btn btn-danger">글쓰기</a></p>
+	<p  class="text-right"><a href="${pageContext.request.contextPath}/board/create"   class="btn btn-danger">글쓰기</a></p>
 </div>
 
 <!-- END FOOTER -->
