@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<Context docBase="D:\java_2025\tomcat9.0\apache-tomcat-9.0.95\wtpwebapps\project_mvc_milk1" path="/project_mvc_milk1" reloadable="true" source="org.eclipse.jst.jee.server:project_mvc_milk1">
-		<Resource auth="Container" driverClassName="com.mysql.cj.jdbc.Driver" maxIdle="30" maxTotal="100" maxWaitMillis="10000" name="jdbc/mbasic" password="1234" type="javax.sql.DataSource" url="jdbc:mysql://localhost:3306/mbasic" username="root"/>
-	</Context>
