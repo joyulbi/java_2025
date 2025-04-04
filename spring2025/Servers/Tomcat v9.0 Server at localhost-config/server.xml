@@ -166,7 +166,7 @@
 	
 	
 	
-	<Context docBase="spring013_ex_board5" path="/spring013_ex_board5" reloadable="true" source="org.eclipse.jst.jee.server:spring013_ex_board5"/><Context docBase="spring012_useful" path="/spring012_useful" reloadable="true" source="org.eclipse.jst.jee.server:spring012_useful"/></Host>
+	<Context docBase="projectName" path="/myapp" reloadable="true" source="org.eclipse.jst.jee.server:projectName"/></Host>
     </Engine>
   </Service>
 </Server>

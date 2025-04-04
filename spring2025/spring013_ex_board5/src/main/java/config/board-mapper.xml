@@ -18,6 +18,6 @@
 		select * from sboard  where bno=#{bno}
 	</select>
 	<select    resultType="BoardDto"  id="selectAll" >
-		select * from sboard  
+		select * from sboard  order by bno desc
 	</select>
 </mapper>

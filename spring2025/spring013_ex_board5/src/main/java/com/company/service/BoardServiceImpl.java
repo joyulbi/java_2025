@@ -18,10 +18,7 @@ public class BoardServiceImpl implements BoardService {
 
 			try {
 				dto.setBip(InetAddress.getLocalHost().getHostAddress());
-			} catch (UnknownHostException e) {
-				
-				e.printStackTrace();
-			}
+			} catch (UnknownHostException e) {  e.printStackTrace(); }
 		
 		return dao.insert(dto); }//글쓰기 기능
 	@Override public int update(BoardDto dto) {  return dao.update(dto); }// 수정기능 (해당 글 번호보기)

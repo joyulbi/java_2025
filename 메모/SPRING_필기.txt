@@ -508,7 +508,7 @@ FrontController - 공통작업 수행 → 세부컨트롤러에 처리
 5. Tx (sql 여러 개 실행 될 때 중간에 실패하면 sql 다 처리 안 되게)
 
 
-▶jstl
+▶ jstl
 1.pom.xml
         <!-- https://mvnrepository.com/artifact/javax.servlet/jstl -->
       <dependency>
@@ -516,8 +516,6 @@ FrontController - 공통작업 수행 → 세부컨트롤러에 처리
          <artifactId>jstl</artifactId>
          <version>1.2</version>
       </dependency>
-
-
 
 2.Model
 - table
@@ -531,9 +529,121 @@ FrontController - 공통작업 수행 → 세부컨트롤러에 처리
    글쓰기 : 이미지올리기 /  그 이미지 이름 경로 및 데이터 insert시 저장
 
 
+
+▶ dto → lombok
+0. https://mvnrepository.com/artifact/org.projectlombok/lombok
+1. https://projectlombok.org/download
+2. 다운로드
+3. 더블클릭 /   cmd창     java  -jar    파일이름.jar
+   설치경로 설정
+4. spring 다시 열기
+
+※ 만약 인식이 안되면....
+1. C드라이브로 스프링zip. 옮기기 - 압축풀기
+2. 경로 짧게
+
+<!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
+<dependency>
+    <groupId>org.projectlombok</groupId>
+    <artifactId>lombok</artifactId>
+    <version>1.18.18</version>
+    <scope>provided</scope>
+</dependency>
+
 ------------------------------------------
 #8. restful
 ------------------------------------------
+
+
+
+▶ Aop( 관점지향프로그래밍 : Aspect Oriented Programming )
+
+1) 핵심기능 vs 부가기능
+- 핵심기능 : 비지니스로직
+- 부가기능 : 비지니스로직 도와주는 기능
+
+2) Aspect
+- AOP ( Aspect Oriented Programming )
+- Aspect : 관점어떤행동, 시작, 완료, 반복,,,, 나타내는 형태
+- Advice ( 부가기능 정의 ) + PointCut ( 적용부위 ) = Aspect
+
+3) 용어 
+Target : 대상
+Advice : 부가기능정의
+PointCut : 적용타겟에 메서드로 대상을 선별하는 정규식
+Weaving : Target (대상)에 Advice(부가기능)를 처리(삽입)하는 과정
+
+4) 특징
+- 프록시기반의 Aop
+- 프록시(대리)
+- 프록시 Target(대상)에 Advice(부가기능)를 처리(삽입)하는 과정에서 생성되는 객체
+
+호출 → [ Proxy[ Target ] ]
+
+
+<!-- https://mvnrepository.com/artifact/org.aspectj/aspectjrt -->
+<dependency>
+    <groupId>org.aspectj</groupId>
+    <artifactId>aspectjrt</artifactId>
+    <version>1.7.3</version>
+    <scope>runtime</scope>
+</dependency>
+<!-- https://mvnrepository.com/artifact/org.aspectj/aspectjweaver -->
+<dependency>
+    <groupId>org.aspectj</groupId>
+    <artifactId>aspectjweaver</artifactId>
+    <version>1.7.3</version>
+    <scope>runtime</scope>
+</dependency>
+<!-- https://mvnrepository.com/artifact/org.springframework/spring-aop -->
+<dependency>
+    <groupId>org.springframework</groupId>
+    <artifactId>spring-aop</artifactId>
+    <version>4.3.28.RELEASE</version>
+</dependency>
+
+
+
+▶ HikariCP (sbcp / sql 과정 다 보이게)
+1) pom.xml
+2) db.properties / root-context.xml
+3) hikari properties 설정
+      <!-- HikariCP -->
+      <!-- HikariCP -->
+      <!-- https://mvnrepository.com/artifact/com.zaxxer/HikariCP -->
+      <dependency>
+          <groupId>com.zaxxer</groupId>
+          <artifactId>HikariCP</artifactId>
+          <version>2.7.4</version>
+      </dependency>
+         
+      <!-- https://mvnrepository.com/artifact/org.bgee.log4jdbc-log4j2/log4jdbc-log4j2-jdbc4 -->
+      <dependency>
+          <groupId>org.bgee.log4jdbc-log4j2</groupId>
+          <artifactId>log4jdbc-log4j2-jdbc4</artifactId>
+          <version>1.16</version>
+      </dependency>
+      <!-- HikariCP -->
+      <!-- HikariCP -->
+      <!-- HikariCP --> 
+
+
+▶ Tx (sql 여러 개 실행 될 때 중간에 실패하면 sql 다 처리 안 되게)
+- 트랜잭션
+- 여러단계의 처리를 하나의 처리처럼 다루는 기능
+- 반영(commit) / 되돌리기 (rollback)
+
+1) pom.xml
+      <dependency>
+         <groupId>org.springframework</groupId>
+         <artifactId>spring-tx</artifactId>
+         <version>${org.springframework-version}</version>
+      </dependency>
+
+
+2) root-context.xml
+- DataSourceTransactionManager
+- <tx:annotation-driven/>
 
 
 
