@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import lombok.RequiredArgsConstructor;
 
@@ -34,8 +35,10 @@ public class BoardController {
 	} // http://localhost:8080/board/insert (글쓰기 폼)
 	
 	@PostMapping("/board/insert")
-	public String insert_post(Board board){
-		service.insert(board); //## 글쓰기 기능
+	public String insert_post(Board board ,@RequestParam Long member_id){
+		System.out.println("......"+board);
+		System.out.println("......"+member_id);
+		service.insert(board, member_id); //## 글쓰기 기능
 		return "redirect:/board/list"; 
 	} // http://localhost:8080/board/insert (글쓰기 기능 - 갱신된 리스트)
 	

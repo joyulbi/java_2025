@@ -30,7 +30,7 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public void insert(Board board) {
+	public void insert(Board board, Long member_id) {
 		try { board.setBip(InetAddress.getLocalHost().getHostAddress());
 		} catch (UnknownHostException e) { e.printStackTrace(); }
 		boardRepository.save(board);
