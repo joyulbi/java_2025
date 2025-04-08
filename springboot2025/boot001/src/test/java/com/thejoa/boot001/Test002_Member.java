@@ -29,7 +29,7 @@ class Test002_Member {
 		memberRepository.save(member);
 	}
 	
-	@Disabled //@Test 
+	@Disabled //@Test  
 	public void selectAll() {
 		List<Member> list=memberRepository.findAll();
 		for(Member m:list) {System.out.println(m);}
@@ -53,7 +53,7 @@ class Test002_Member {
 	
 	
 	
-	@Test  
+	@Disabled//@Test  
 	public void delete() {
 		//1. 수정 할 팀 찾기
 		// Optional<Team>  - null 값 안전보장
