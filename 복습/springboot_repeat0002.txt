@@ -1,0 +1,27 @@
+#1. 반복 : <div th:ezxh="dto, state;${list}"> ${dto.id} </div>
+#2. 동적문자열 : <h3 th:text="${dto.name}"></h3>,<input th:value="{dto.name}"/>
+#3. 링크 : <a th:href="@{/board/list}"></a>
+	 <a th:href="@{|/board/${dto.id}|}"></a>
+	 <form th:action="@{/board/insert}">
+Q1.  springboot  thymeleaf를 이용하여  서버로부터 list를 넘겨받아 게시판의 반복문을 작성하려고 한다.  
+<tr th:each="dto, state : ${list}" >
+	<td><a   th:text="${dto.btitle}" <!-- 1-1. 제목 btitle -->
+		th:href="@{|/board/detail/${}dto.id}|}"></a></td>  
+	<!-- 1-2.  /board/detail 경로의 해당 id로 이동  -->
+	<td  th:text="${dto.member.name}"></td>  <!-- 1-3. 작성자 member객체안의 name   -->
+</tr> 
+	
+Q2.  thymeleaf 에서 a태그에  /board/list경로로 링크를 걸려고 한다.  
+<a    th:href="@{/board/list}" class="btn btn-outline-primary btn-block">목록보기</a>
+
+Q3.  form 태그에서  /board/delete로  action을 설정하려고 한다. 들어갈 코드는?
+<form   th:action="@{/board/delete}" method="post" id="writeForm"
+	onsubmit="return  form()">
+	<div class="my-3">
+		<label for="bpass" class="form-label">비밀번호</label> <input
+			type="text" name="bpass" id="bpass" class="form-control">
+	</div>
+	<div class="my-3  text-end">
+		<input type="submit" value="입력" class="btn btn-primary btn-block">
+	</div>
+</form>

@@ -10,7 +10,61 @@
 <body>
 	<!-- layout.html <th:block layout:fragment="content"> -->
 	<div layout:fragment="content">
-		<h3 th:text = ${dto}></h3>
+			<div class="container card  my-5   p-3">
+			<h3>MULTIBOARD - 글수정</h3>
+			<form th:action="@{/board/update}" method="post" id="writeForm"
+				onsubmit="return  form()">
+				
+				<div class="my-3">
+					<label for="member" class="form-label">이름</label> 
+					<input type="text" name="member_name" id="member" class="form-control" 
+					th:value="${dto.member.name}" readonly>
+					<input type="hidden" name="id" th:value="${dto.id}"><!-- 꼭 넣기 -->
+				</div>
+				<div class="my-3">
+					<label for="btitle" class="form-label">제목</label> <input
+						type="text" name="btitle" id="btitle" class="form-control">
+				</div>
+				<div class="my-3">
+					<label for="bpass" class="form-label">비밀번호</label> <input
+						type="text" name="bpass" id="bpass" class="form-control">
+				</div>
+				<div class="my-3">
+					<label for="bcontent" class="form-label">내용</label>
+					<textarea name="bcontent" id="bcontent" cols="60" rows="10"
+						 class="form-control" th:text=${dto.bcontent}></textarea>
+				</div>
+				<div class="my-3  text-end">
+					<input type="submit" value="입력" class="btn btn-primary btn-block">
+					<input type="reset" value="취소"
+						class="btn btn-outline-primary btn-block"> <a
+						th:href="@{/board/list}" class="btn btn-outline-primary btn-block">목록보기</a>
+				</div>
+			</form>
+			<!-- end form -->
+			<script>
+				function form() {
+					let btitle = document.getElementById("btitle");
+					let bcontent = document.getElementById("bcontent");
+					let bpass = document.getElementById("bpass");
+					if (btitle.value == "") {
+						alert("빈칸입니다");
+						btitle.focus();
+						return false;
+					}
+					if (bcontent.value == "") {
+						alert("빈칸입니다");
+						bcontent.focus();
+						return false;
+					}
+					if (bpass.value == "") {
+						alert("빈칸입니다");
+						bpass.focus();
+						return false;
+					}
+				}
+			</script>
+		</div>
 	</div>
 </body>
 </html>

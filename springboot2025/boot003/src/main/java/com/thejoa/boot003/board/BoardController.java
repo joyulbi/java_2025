@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import lombok.RequiredArgsConstructor;
 
@@ -29,18 +30,24 @@ public class BoardController {
 		return "board/detail"; // board 폴더 안에 / list파일
 	} // http://localhost:8080/board/detail/5
 	
+
+	/////////////////////////////////////////////////////////////////////////
 	@GetMapping("/board/insert")
 	public String insert_get(Model model){
 		return "board/write"; 
 	} // http://localhost:8080/board/insert (글쓰기 폼)
 	
 	@PostMapping("/board/insert")
-	public String insert_post(Board board ,@RequestParam Long member_id){
+	public String insert_post(Board board , @RequestParam Long member_id){
 		System.out.println("......"+board);
 		System.out.println("......"+member_id);
 		service.insert(board, member_id); //## 글쓰기 기능
 		return "redirect:/board/list"; 
-	} // http://localhost:8080/board/insert (글쓰기 기능 - 갱신된 리스트)
+	} // form테스트 (글쓰기 기능 - 갱신된 리스트)
+	/////////////////////////////////////////////////////////////////////////
+	// @RequestParam - form, query string, 데이터 헤더로부터 데이터 추출
+	// @PathVariable - url 경로의 변수를 추출할 때 사용
+	
 	
 	@GetMapping("/board/update/{id}")
 	public String update_get(@PathVariable Long id, Model model){
@@ -49,21 +56,36 @@ public class BoardController {
 	} // http://localhost:8080/board/update/5 (글수정 폼)
 	
 	@PostMapping("/board/update")
-	public String update_post(Board board){
-		service.update(board);
-		return "redirect:/board/list"; 
+	public String update_post(Board board,RedirectAttributes rttr){
+		String msg="fail";
+		if(service.update(board)>0) {msg="글 수정 성공!";}
+		rttr.addFlashAttribute("msg",msg);
+		//service.update(board);
+		return "redirect:/board/detail/"+board.getId(); 
 	} // http://localhost:8080/board/update (글수정 기능 - 갱신된 리스트)
 	
 	@GetMapping("/board/delete/{id}")
-	public String delete_get(){
+	public String delete_get(@PathVariable Long id , Model model){
+		model.addAttribute("id", id);
 		return "board/delete"; 
 	} // http://localhost:8080/board/delete (글삭제 폼)
 	
 	@PostMapping("/board/delete")
-	public String delete_post(Board board){
-		service.delete(board);//## 삭제 기능
+	public String delete_post(Board board, RedirectAttributes rttr){
+		String msg="fail";
+		if(service.delete(board)>0) {msg="글삭제 성공!";}
+		rttr.addFlashAttribute("msg",msg);
 		return "redirect:/board/list"; 
 	} // http://localhost:8080/board/delete (글삭제 기능 - 갱신된 리스트)
+	
+	
+	
+	//////////////////////////////////////////////////////
+    @GetMapping("/board/search")
+    public String search(@RequestParam(required = false) String search, Model model) {  
+        model.addAttribute("result", search + "에 대한 검색 결과");
+        return "board/search"; 
+    }
 }
 /** Restful Api
  기존게시판 : localhost:8080/board/detail?bno=10 쿼리스트링

@@ -17,7 +17,7 @@
 				onsubmit="return  form()">
 				<div class="my-3">
 					<label for="member" class="form-label">이름</label> <input
-						type="text" name="member" id="member" class="form-control" th:value="1L" readonly>
+						type="text" name="member_id" id="member" class="form-control" th:value="2" readonly>
 				</div>
 				<div class="my-3">
 					<label for="btitle" class="form-label">제목</label> <input
@@ -41,7 +41,7 @@
 					<input type="submit" value="입력" class="btn btn-primary btn-block">
 					<input type="reset" value="취소"
 						class="btn btn-outline-primary btn-block"> <a
-						href="list.jsp" class="btn btn-outline-primary btn-block">목록보기</a>
+						th:href="@{/board/list}" class="btn btn-outline-primary btn-block">목록보기</a>
 				</div>
 			</form>
 			<!-- end form -->

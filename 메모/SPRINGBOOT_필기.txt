@@ -10,7 +10,7 @@
 	3) @Repository - Dao
 
 - ex)
-	1) @Entitiy이용해서 Member 테이블 만들기
+	1) @Entity이용해서 Member 테이블 만들기
 	2) @Repository 이용해서 MemberRepository
 
 ■ STEP4. view
@@ -37,4 +37,75 @@ spring.thymeleaf.suffix=.html
 4. 화면설정
 
 ■ STEP5. board
+>> Query
+
 ■ STEP6. security
+1. spring security?
+1) 애플리케이션의 보안(인증, 인가) 담당
+2) filter의 흐름에 따라 처리
+
+2. 인증 vs 인가
+1) 인증 - 본인이 맞는지 확인		여권)-본인이 맞는지 인증
+2) 인가 - 인증된 사용자가 접근 가능	조종석까지 가기 불가능 
+
+3. spring security 아키텍쳐 (1)
+1) 사용자가 로그인폼 로그인시도 (username + password 전달)
+2)  UsernamePasswordAuthentication  요청정보 - Authentication 생성 
+3)  Authentication 인증처리
+
+10) 인증완료 (사용자정보)  SecurityContextHolder에 담기
+   - AuthenticationSuccessHandler 성공!
+   - AuthenticationFailureHandler  실패!
+	
+3. spring security 아키텍쳐 (2)
+4) Authentication Manager 인증담당
+   - UsernamePasswordAuthentication Token은 Provider를 찾는데 사용
+5) AuthenticationProvider - 로그인 정보와 db정보를 비교
+6) UserDetailService - db에 있는 사용자 정보 가져오기
+
+
+
+[실습]
+1. spring project > pom.xml
+   ex) board 만들었었던 project에 security 추가
+
+2. localhost:8080/login 로그인창 -> 인증 (본인확인)
+3. SecurityConfig.java - 설정
+4. Member	   - @Entitiy
+5. MemberRepository - crud(Dao)
+6. MemberService
+7. Controller
+8. View
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
