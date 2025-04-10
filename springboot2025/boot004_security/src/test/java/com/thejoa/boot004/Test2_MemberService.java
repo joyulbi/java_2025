@@ -10,19 +10,20 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import com.thejoa.boot004.member.Member;
 import com.thejoa.boot004.member.MemberRepository;
+import com.thejoa.boot004.member.MemberService;
 
 @SpringBootTest
-class Boot004SecurityApplicationTests {
+class Test2_MemberService {
 	@Autowired MemberRepository memberRepository;
-
+	@Autowired MemberService memberService;
 	
 	@Disabled//@Test
 	public void insert() {
 		Member member = new Member();
-		member.setEmail("second");
-		member.setPassword("123");
 		member.setUsername("two");
-		memberRepository.save(member);
+		member.setPassword("123");
+		member.setEmail("second");
+		System.out.println(memberService.insertMember(member));
 	}
 	@Disabled//@Test
 	public void findAll() {
@@ -48,7 +49,7 @@ class Boot004SecurityApplicationTests {
 		member.setUsername("one-new");
 		memberRepository.save(member);
 	}
-	@Test 
+	@Disabled//@Test 
 	public void updatePassword() {
 		memberRepository.updateByIdAndPassword("1234", "111", 1L); // 바꿀것, 원래것, ID
 	}

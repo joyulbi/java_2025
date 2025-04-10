@@ -1,4 +1,4 @@
-package com.thejoa.boot004.member;
+package com.thejoa.boot005.member;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

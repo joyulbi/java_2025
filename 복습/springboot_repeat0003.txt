@@ -1,0 +1,23 @@
+Q1.  스프링 시큐리티를 하려고 한다.  인증과 인가의 차이점은?
+	인증 - 본인이 맞는지확인 ( 여권비행기 본인 확인 )
+	인가 - 사용 가능범위 ( 조종석 )
+
+Q2.  jpa에서 테이블을 작성하려고 한다. 객체 엔티티에 붙여야 하는 @은?
+	@Entity
+
+Q3.  Repository 를 작성하려고 한다.  extends 해야할 것은?
+	public interface BoardRepository extends JPARepository<Board,Long>{}
+
+Q4.  jpa에서 암호화를 시키려고 한다.  사용해야할 것은?
+	@Bean PasswordEncoder passwordEncoder(){
+		return new BCryptPasswordEncoder();
+	}
+
+Q5. board Repository에서 @Query를 이용하여 id와 bpass가 같으면 btitle과 bcontent를 수정하는 코드를 작성하시오.
+	@Modifying
+	@Transactional
+	@Query("update Board b set b.btitle = :btitle, b.bcontent = :bcontent where b.id = :id and b.bpass = :bpass")
+	int updateByIdAndBpass( String btitle, String bcontent, Long id, String bpass );
+Q6. board Repository에서 @Query를 이용하여 id를 기준으로 내림차순하는 코드를 작성하시오.
+	@Query(value="select b from Board b order by id desc")
+	List<Board> findByIdOrderByDesc();
