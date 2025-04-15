@@ -16,4 +16,4 @@ public class UserDto {
 }
 
 
-// com.회사명.프로젝트.개발단위 - @Controller / @Servlet / @DB관련
+// com.회사명.프로젝트.개발단위 - @Controller / @Servlet/@Db관련
