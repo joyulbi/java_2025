@@ -1,4 +1,4 @@
-package com.thejoa.boot004.util3_naver_mail;
+package com.thejoa.boot008.util3_naver_mail;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,4 +20,3 @@ public class MailController {
 	}
 	
 }
-

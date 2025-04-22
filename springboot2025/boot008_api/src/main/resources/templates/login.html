@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html >
 <html   xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
@@ -16,13 +16,15 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 </head>
 <body>
-	<div class="container card">
-	 <h3 class="bg-warning text-white">KAKAO LOGIN</h3>
-	 <p>
-	 	<a th:href="${url}">
-	 		<img alt="kakao login button" th:src="@{/images/kakao.png}">
-	 	</a>
-	 </p>
-	</div>
+   <div class="container  card  ">
+   		<h3 class="bg-warning  text-white">KAKAO LOGIN</h3>
+   		<p>
+   			<a th:href="${url}">
+   				<img th:src="@{/images/kakao.png}"  alt="kakao login button"/>
+   			</a>
+   		</p>
+   </div>
 </body>
 </html>
+
+

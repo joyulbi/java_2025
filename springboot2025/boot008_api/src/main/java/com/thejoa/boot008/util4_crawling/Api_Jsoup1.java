@@ -1,4 +1,4 @@
-package com.thejoa.boot004.util4_crawling;
+package com.thejoa.boot008.util4_crawling;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -13,10 +13,10 @@ import org.springframework.stereotype.Component;
 import lombok.extern.log4j.Log4j;
 
 @Component 
-public class Api_Jsoup {
+public class Api_Jsoup1 {
 	
 	// https://statiz.sporki.com/player/?m=playerinfo&p_no=
-	
+	//int [] player = {16044 , , , , , , , ,};
 	
     public List<String> jsoup1() {
     	 String url = "https://statiz.sporki.com/player/?m=playerinfo&p_no=16044";

@@ -1,5 +1,5 @@
-<!DOCTYPE html>
-<html>
+<!DOCTYPE html >
+<html   xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -16,36 +16,43 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 </head>
 <body>
-	<!-- CKEditor,Summernote -->
-	<div class="container card bg-primary text-white">
-		<h3 th:text="메일보내기"></h3>
-		<form th:action="@{/mail}" method="post">
-			<table class="table table-striped">
-				<caption>관리자에게 메일 보내기</caption>
-				<tbody>
-					<tr>
-						<th scope="row"><label for="subject">Title</label></th>
-						<td><input type="text" name="subject" id="subject" size="40"
-							class="form-control"></td>
-					</tr>
-					<tr>
-						<th scope="row"><label for="content">Content</label></th>
-						<td><textarea name="content" rows="10" cols="40"
-								class="form-control" id="content"></textarea></td>
-					</tr>
-					<tr>
-						<td colspan="2">
-							<input type="submit" value="Submit" class="btn btn-warning">
-						</td>
-					</tr>
-				</tbody>
-			</table>
+	<!-- CKEditor , Summernote -->
+	<div  class="container  card  bg-primary  text-white">
+		<h3  th:text="메일보내기"></h3>
+		<form  th:action="@{/mail}"  method="post">
+           <table class="table table-striped">
+               <caption>관리자에게 메일 보내기</caption>
+               <tbody>
+                   <tr>
+                       <th scope="row"><label for="subject">Title</label></th>
+                       <td><input type="text" name="subject" id="subject" size="40" class="form-control"></td>
+                   </tr>
+                   <tr>
+                       <th scope="row"><label for="content">Content</label></th>
+                       <td>
+                           <textarea name="content" rows="10" cols="40" class="form-control" id="content"></textarea>
+                       </td>
+                   </tr>
+                   <tr>
+                       <td colspan="2">
+                           <input type="submit" value="Submit" class="btn btn-primary">
+                       </td>
+                   </tr>
+               </tbody>
+           </table>
 		</form>
-		<script th:inline="javascript">
+		<script  th:inline="javascript">   
 			$(function(){
-				CKEDTIOR.replace('content'); // editor 적용할 부위
+				CKEDITOR.replace('content');  // editor 적용할 부위    id="content"
 			});
 		</script>
 	</div>
 </body>
 </html>
+
+
+
+
+
+
+

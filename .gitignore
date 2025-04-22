@@ -2,3 +2,4 @@
 /tomcat9.0/
 /tomcat9.0/*.log
 /Servers/
+/springboot2025/boot008_api/src/main/resources/application-oauth.properties

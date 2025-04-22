@@ -1,4 +1,4 @@
-package com.thejoa.boot004.util3_naver_mail;
+package com.thejoa.boot008.util3_naver_mail;
 
 import java.util.Properties;
 
@@ -17,13 +17,11 @@ import org.springframework.stereotype.Component;
 @Component
 public class NaverMail {
 	 
-	private String subject,content;
-	
 	public void sendMail( String subject, String content ) {
 		//1. 보내는쪽
 		String  host = "smtp.naver.com";
-		String  user = "joyulb@naver.com";   // naver아이디  cozizii@naver.com
-		String  password="yulnam0622^^";  // naver 비번
+		String  user = "본인아이디@naver.com";   // naver아이디  cozizii@naver.com
+		String  password="본인비번";  // naver 비번
 		
 		//2. 받는사람
 		String  to = "cozizii-_-@naver.com";

@@ -1,4 +1,4 @@
-package com.thejoa.boot004.util4_crawling;
+package com.thejoa.boot008.util4_crawling;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class JsoupController {
-	@Autowired  Api_Jsoup jsoup;
+	@Autowired  Api_Jsoup1 jsoup;
 	 
 	@GetMapping(value="/jsoup1" , 
 			produces="application/json; charset=UTF-8")
