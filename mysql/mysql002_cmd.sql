@@ -1174,6 +1174,39 @@ bno	int not null auto_increment primary key,
 btitle varchar(1000) not null,
 bcontent text not null,
 bname varchar(100) not null,
-bit timestamp default 0,
-bdate int not null default 'current_timestamp',
+bit int default 0,
+bdate timestamp not null default current_timestamp,
 bip varchar(100) not null);
+desc board;
+ALTER TABLE board CHANGE bit bhit int DEFAULT 0;
+
+use mbasic;
+desc userinfo;
+select*from sboard;
+update userinfo set no=5 where no=7;
+desc sboard;
+
+create table sboard select * from board;
+desc sboard;
+select*from sboard;
+alter table sboard add COLUMN bpass VARCHAR(255);
+SELECT * FROM sboard WHERE bno = 39;
+delete from sboard where bno=39;
+
+use mbasic;
+desc sboard;
+ALTER TABLE sboard
+MODIFY COLUMN bno INT NOT NULL AUTO_INCREMENT,
+ADD PRIMARY KEY (bno);
+select *from sboard;
+DELETE FROM sboard;
+DELETE FROM sboard WHERE bno=52;
+
+
+
+
+use ssgfc;
+show tables;
+select * from player;
+desc player;
+
