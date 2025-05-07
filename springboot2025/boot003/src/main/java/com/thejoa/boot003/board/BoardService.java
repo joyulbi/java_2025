@@ -24,7 +24,6 @@ public class BoardService{
 	@Transactional //commit (반영) / rollback (되돌리기)
 	public Board find(Long id) { //##조회 수 올리고 / 상세보기가능
 		Board board = boardRepository.findById(id).get();
-		
 		board.setBhit(board.getBhit()+1);//기존 조회수 + 1
 		boardRepository.save(board);
 		return board;

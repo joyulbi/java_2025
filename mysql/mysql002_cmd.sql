@@ -1204,9 +1204,22 @@ DELETE FROM sboard WHERE bno=52;
 
 
 
-
 use ssgfc;
 show tables;
 select * from player;
 desc player;
+
+select * from player_stat;
+select * from user;
+
+
+SET SQL_SAFE_UPDATES = 0;
+
+UPDATE player_stat
+SET stat_map = JSON_SET(stat_map, '$."비율"', '0.333')
+WHERE id = 62
+  AND JSON_EXTRACT(stat_map, '$."Year"') = '2025'
+  AND JSON_EXTRACT(stat_map, '$."Div."') = '144G';
+
+
 

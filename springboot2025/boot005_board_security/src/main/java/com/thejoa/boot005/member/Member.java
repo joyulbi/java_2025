@@ -28,6 +28,7 @@ public class Member {
 	private String email;
 	
 	@Column(updatable = false)
+	private LocalDateTime createDate = LocalDateTime.now();
 	private LocalDateTime udate = LocalDateTime.now();
 	
 	@OneToMany

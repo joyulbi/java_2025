@@ -57,7 +57,7 @@ public class BoardTest {
 			boardRepository.save(board);
 		}
 	}
-	@Disabled//@Test
+	@Test//@Disabled
 	public void delete() {
 		Optional<Board> findBoard = boardRepository.findById(4L);
 		if(findBoard.isPresent()) {
