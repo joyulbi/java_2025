@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/layout}">
+
+<head>
+    <title layout:title="게시판 목록">게시판 목록</title>
+    <meta charset="UTF-8">
+</head>
+
+<body>
+<div layout:fragment="content">
+
+    <div class="container my-5">
+        <h3>MULTIBOARD</h3>
+        <table class="table table-striped table-bordered table-hover text-center">
+            <caption>MULTIBOARD-LIST</caption>
+            <thead>
+            <tr>
+                <th scope="col">NO</th>
+                <th scope="col">TITLE</th>
+                <th scope="col">DATE</th>
+                <th scope="col">HIT</th>
+            </tr>
+            </thead>
+            <tbody>
+            <!-- dto = 하나의 게시글 객체, state = 루프 상태 -->
+            <tr th:each="dto, state : ${list}">
+                <td th:text="${list.size() - state.index}">번호</td>
+                <td>
+                    <a th:href="@{'/board/detail/' + ${dto.id}}" th:text="${dto.btitle}">제목</a>
+                </td>
+                <td th:text="${#temporals.format(dto.createDate, 'yyyy-MM-dd HH:mm')}">작성일</td>
+                <td th:text="${dto.bhit}">조회수</td>
+            </tr>
+            </tbody>
+        </table>
+
+        <p class="text-end">
+            <a th:href="@{/board/insert}" class="btn btn-primary">글쓰기</a>
+        </p>
+    </div>
+
+</div>
+</body>
+</html>
