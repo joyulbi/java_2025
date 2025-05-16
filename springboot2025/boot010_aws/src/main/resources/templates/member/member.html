@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{fragments/layout}"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+<meta charset="UTF-8">
+<title>SPRINGBOOT BOARD - 홈</title>
+</head>
+<body>
+
+	<!-- content 부분에 본문 콘텐츠 추가 -->
+	<div layout:fragment="content">
+		<h1 th:text="MYPAGE"></h1>
+										<!-- 인가:권한 -->
+		<div class="alert alert-info" sec:authorize="hasRole('ADMIN')">ADMIN ROLE</div>
+		<div class="alert alert-info" sec:authorize="hasRole('MEMBER')">MEMBER ROLE</div>
+		<hr/>
+		<div class="alert alert-info" sec:authentication="principal"></div> <!-- 인증:신원확인 -->
+		<div class="alert alert-info" sec:authentication="principal.authorities"></div> <!-- 인증:신원확인 -->
+		<div class="alert alert-info" sec:authentication="principal.username"></div> <!-- 인증:신원확인 -->
+		
+		
+	</div>
+
+</body>
+</html>
