@@ -44,6 +44,7 @@ app.use(session({
   saveUninitialized: false, //초기화되지 않은 세션은 저장하지 않음.
   resave:false, //세션이 변경되지 않았다면 저장하지 않음
   secret:process.env.COOKIE_SECRET,//세션데이터 암호화하기 위한 비밀키
+  cookie:{secure:false} //production 에서 true
 }));
 app.use(passport.initialize()); //인증처리 라이브러리 초기화
 app.use(passport.session()); //사용자 인증상태를 세션에 저장 

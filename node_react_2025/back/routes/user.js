@@ -104,10 +104,13 @@ router.post('/logout',isLoggedIn,async(req,res,next)=>{
   //res.send('로그아웃');
   req.logout(function (err) {
     if(err){return next(err)}
-    //res.redirect('/'); //로그아웃 후 리다이렉션
+  req.session.destroy((err)=>{
+    if(err){
+      return next(err);
+    }
+    res.send('로그아웃 성공'); //로그아웃이 되면 문자열 반환
+    });//현재 세션 삭제
   });
-  req.session.destroy();//현재 세션 삭제
-  res.send('로그아웃 성공'); //로그아웃이 되면 문자열 반환
 });
 
 //5.닉네임변경
