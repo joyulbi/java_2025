@@ -84,9 +84,9 @@ router.post('/',isLoggedIn,upload.none(),async(req,res,next)=>{
     const fullPost = await Post.findOne({
       where : {id:post.id},
       include:[
-         {model : Image} // 명시적으로 추가안해도 자동으로 포함
+        {model : User, attributes : ['id','nickname']}
+        ,{model : Image} // 명시적으로 추가안해도 자동으로 포함
         ,{model : User, as : 'Likers', attributes : ['id']}
-        ,{model : User, attributes : ['id','nickname']}
         ,{model : Comment ,include:[{model:User, attributes:['id','nickname']}]}
       ]
     });

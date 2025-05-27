@@ -1,128 +1,398 @@
-import {all,fork,delay,put,takeLatest,throttle} from 'redux-saga/effects'
+import axios from 'axios';
+import { all, fork, put, takeLatest, throttle, call } from 'redux-saga/effects';
+
+////////////////////////////////////////////////////// ACTION TYPE IMPORT 1
 import {
-LOAD_POSTS_REQUEST ,
-LOAD_POSTS_SUCCESS ,
-LOAD_POSTS_FAILURE ,
-generateDummyPost, //더미데이터 호출
+  LOAD_POSTS_REQUEST,
+  LOAD_POSTS_SUCCESS,
+  LOAD_POSTS_FAILURE,
+  LOAD_USER_POSTS_FAILURE, LOAD_USER_POSTS_REQUEST, LOAD_USER_POSTS_SUCCESS,  //##
+  LOAD_HASHTAG_POSTS_FAILURE, LOAD_HASHTAG_POSTS_REQUEST, LOAD_HASHTAG_POSTS_SUCCESS, //##
+  ADD_POST_FAILURE,
+  ADD_POST_REQUEST,
+  ADD_POST_SUCCESS,                      
+  UPDATE_POST_FAILURE,
+  UPDATE_POST_REQUEST,
+  UPDATE_POST_SUCCESS,
+  REMOVE_POST_FAILURE,
+  REMOVE_POST_REQUEST,
+  REMOVE_POST_SUCCESS,
+  ADD_COMMENT_FAILURE,
+  ADD_COMMENT_REQUEST,
+  ADD_COMMENT_SUCCESS,
+  UPLOAD_IMAGES_FAILURE,
+  UPLOAD_IMAGES_REQUEST,
+  UPLOAD_IMAGES_SUCCESS,
 
-ADD_POST_REQUEST ,
-ADD_POST_SUCCESS ,
-ADD_POST_FAILURE ,
+  LIKE_POST_FAILURE,
+  LIKE_POST_REQUEST,
+  LIKE_POST_SUCCESS, 
+  UNLIKE_POST_FAILURE,
+  UNLIKE_POST_REQUEST,
+  UNLIKE_POST_SUCCESS, 
 
-REMOVE_POST_REQUEST, 
-REMOVE_POST_SUCCESS ,
-REMOVE_POST_FAILURE ,
+  
+  LOAD_POST_FAILURE,
+  LOAD_POST_REQUEST,
+  LOAD_POST_SUCCESS,
 
-ADD_COMMENT_REQUEST ,
-ADD_COMMENT_SUCCESS ,
-ADD_COMMENT_FAILURE
+  RETWEET_FAILURE,
+  RETWEET_REQUEST,
+  RETWEET_SUCCESS,
+} from '../reducers/post';
+import { ADD_POST_TO_ME, REMOVE_POST_OF_ME } from '../reducers/user';
 
-}from '../reducers/post'
-
-function addpostApi(data){
-  return axios.POST('/post',data);
+//////////////////////////////////////////////////////  SERVER API  2
+// fork(watchLoadPosts),
+// fork(watchAddPost),
+// fork(watchUpdatePost),
+// fork(watchRemovePost),
+// fork(watchAddComment),
+// fork(watchUploadImages),
+function loadPostAPI(data) {
+  return axios.get(`/post/${data}`);
 }
-function* addpost(action){
-  //const result = yield call(addpostApi, action.data); //처리함수, 처리파라미터
+
+function* loadPost(action) {
   try {
-    yield delay(1000);
+    const result = yield call(loadPostAPI, action.data);
     yield put({
-      type:ADD_POST_SUCCESS,
-      data:action.data //result.data
-    })
-  } catch (error) {
+      type: LOAD_POST_SUCCESS,
+      data: result.data,
+    });
+  } catch (err) {
+    console.error(err);
     yield put({
-      type:ADD_POST_FAILURE,
-      data:error.response.data
-    })
+      type: LOAD_POST_FAILURE,
+      error: err.response.data,
+    });
   }
 }
 
-function addCommentApi(data){
-  return axios.POST('/post/comment',data);
+function addPostAPI(data) {
+  return axios.post('/post', data);
 }
-function* addComment(action) {
-  //const result = yield call( addpostApi , action.data); 처리함수, 처리파라미터
+
+function* addPost(action) {
   try {
-    yield delay(1000);
+    const result = yield call(addPostAPI, action.data);
     yield put({
-      type: ADD_COMMENT_SUCCESS,
-      data: action.data   // result.data
-    })
-  } catch (error) {
+      type: ADD_POST_SUCCESS,
+      data: result.data,
+    });
     yield put({
-      type: ADD_COMMENT_FAILURE,
-      data: error.response.data
-    })
+      type: ADD_POST_TO_ME,
+      data: result.data.id,
+    });
+  } catch (err) {
+    console.error(err);
+    yield put({
+      type: ADD_POST_FAILURE,
+      error: err.response.data,
+    });
   }
 }
 
-function removePostApi(data){
-  return axios.DELETE('/post/',data);
+function updatePostAPI(data) {
+  return axios.patch(`/post/${data.PostId}`, data);
 }
+
+function* updatePost(action) {
+  try {
+    const result = yield call(updatePostAPI, action.data);
+    yield put({
+      type: UPDATE_POST_SUCCESS,
+      data: result.data,
+    });
+  } catch (err) {
+    console.error(err);
+    yield put({
+      type: UPDATE_POST_FAILURE,
+      error: err.response.data,
+    });
+  }
+}
+
+function removePostAPI(data) {
+  return axios.delete(`/post/${data}`);
+}
+
 function* removePost(action) {
-  //const result = yield call( addpostApi , action.data); 처리함수, 처리파라미터
   try {
-    yield delay(1000);
+    const result = yield call(removePostAPI, action.data);
     yield put({
       type: REMOVE_POST_SUCCESS,
-      data: action.data   // result.data
-    })
-  } catch (error) {
+      data: result.data,
+    });
+    yield put({
+      type: REMOVE_POST_OF_ME,
+      data: action.data,
+    });
+  } catch (err) {
+    console.error(err);
     yield put({
       type: REMOVE_POST_FAILURE,
-      data: error.response.data
-    })
+      error: err.response.data,
+    });
   }
 }
 
-function loadPostsApi(data){
-  return axios.POST('/posts',data);
+function addCommentAPI(data) {
+  return axios.post(`/post/${data.postId}/comment`, data); // POST /post/1/comment
 }
-function* loadPosts(action){
-  //const result = yield call(addpostApi, action.data); //처리함수, 처리파라미터
+
+function* addComment(action) {
   try {
-    yield delay(1000);
+    const result = yield call(addCommentAPI, action.data);
     yield put({
-      type:LOAD_POSTS_SUCCESS,
-      data:generateDummyPost(10) //result.data
-    })
-  } catch (error) {
+      type: ADD_COMMENT_SUCCESS,
+      data: result.data,
+    });
+  } catch (err) {
+    console.error(err);
     yield put({
-      type:LOAD_POSTS_FAILURE,
-      data:error.response.data
-    })
+      type: ADD_COMMENT_FAILURE,
+      error: err.response.data,
+    });
   }
 }
 
-/////step2) ACTION 기능추가
-function*watchAddPost(){
-  //yield take('ADD_POST_REQUEST',addpost); // take는 일회용 - 로그인 1번, 게시글도 1번만
-  yield takeLatest(ADD_POST_REQUEST,addpost); // ver-2. 3번요청
-  // yield throttle('ADD_POST',addpost,10000); ver-3. 몇초뒤에 실행, 시간설정가능 -10초뒤에
+function uploadImagesAPI(data) {
+  return axios.post('/post/images', data);
 }
-// ADD_COMMENT_REQUEST
-function*watchAddComment(){
-  yield takeLatest(ADD_COMMENT_REQUEST,addComment);
+
+function* uploadImages(action) {
+  try {
+    const result = yield call(uploadImagesAPI, action.data);
+    yield put({
+      type: UPLOAD_IMAGES_SUCCESS,
+      data: result.data,
+    });
+  } catch (err) {
+    console.error(err);
+    yield put({
+      type: UPLOAD_IMAGES_FAILURE,
+      error: err.response.data,
+    });
+  }
 }
-// REMOVE_POST_REQUEST
-function*watchRemovePost(){
-  yield takeLatest(REMOVE_POST_REQUEST,removePost);
+
+// fork(watchLikePost),
+// fork(watchUnlikePost),
+
+function likePostAPI(data) {
+  return axios.patch(`/post/${data}/like`);
 }
-// LOAD_POSTS_REQUEST
-function*watchLoadPosts(){
-  yield throttle(5000, LOAD_POSTS_REQUEST,loadPosts);
+
+function* likePost(action) {
+  try {
+    const result = yield call(likePostAPI, action.data);
+    yield put({
+      type: LIKE_POST_SUCCESS,
+      data: result.data,
+    });
+  } catch (err) {
+    console.error(err);
+    yield put({
+      type: LIKE_POST_FAILURE,
+      error: err.response.data,
+    });
+  }
 }
-/////step1) all()
-export default function*postSaga() {
-  yield all([ //all - 동시에 배열로 받은 fork들을 동시에 실행
+
+function unlikePostAPI(data) {
+  return axios.delete(`/post/${data}/like`);
+}
+
+function* unlikePost(action) {
+  try {
+    const result = yield call(unlikePostAPI, action.data);
+    yield put({
+      type: UNLIKE_POST_SUCCESS,
+      data: result.data,
+    });
+  } catch (err) {
+    console.error(err);
+    yield put({
+      type: UNLIKE_POST_FAILURE,
+      error: err.response.data,
+    });
+  }
+}
+
+
+
+
+// fork(watchLoadPost),
+// fork(watchLoadUserPosts),
+// fork(watchLoadHashtagPosts),
+// fork(watchRetweet),
+
+
+
+
+function loadHashtagPostsAPI(data, lastId) {
+  return axios.get(`/hashtag/${encodeURIComponent(data)}?lastId=${lastId || 0}`);
+}
+
+function* loadHashtagPosts(action) {
+  try {
+    console.log('loadHashtag console');
+    const result = yield call(loadHashtagPostsAPI, action.data, action.lastId);
+    yield put({
+      type: LOAD_HASHTAG_POSTS_SUCCESS,
+      data: result.data,
+    });
+  } catch (err) {
+    console.error(err);
+    yield put({
+      type: LOAD_HASHTAG_POSTS_FAILURE,
+      error: err.response.data,
+    });
+  }
+}
+
+function loadUserPostsAPI(data, lastId) {
+  return axios.get(`/user/${data}/posts?lastId=${lastId || 0}`);
+}
+
+function* loadUserPosts(action) {
+  try {
+    const result = yield call(loadUserPostsAPI, action.data, action.lastId);
+    yield put({
+      type: LOAD_USER_POSTS_SUCCESS,
+      data: result.data,
+    });
+  } catch (err) {
+    console.error(err);
+    yield put({
+      type: LOAD_USER_POSTS_FAILURE,
+      error: err.response.data,
+    });
+  }
+}
+
+function loadPostsAPI(lastId) {
+  return axios.get(`/posts?lastId=${lastId || 0}`);
+}
+
+function* loadPosts(action) {
+  try {
+    const result = yield call(loadPostsAPI, action.lastId);
+    yield put({
+      type: LOAD_POSTS_SUCCESS,
+      data: result.data,
+    });
+  } catch (err) {
+    console.error(err);
+    yield put({
+      type: LOAD_POSTS_FAILURE,
+      error: err.response.data,
+    });
+  }
+}
+
+function retweetAPI(data) {
+  return axios.post(`/post/${data}/retweet`);
+}
+
+function* retweet(action) {
+  try {
+    const result = yield call(retweetAPI, action.data);
+    yield put({
+      type: RETWEET_SUCCESS,
+      data: result.data,
+    });
+  } catch (err) {
+    console.error(err);
+    yield put({
+      type: RETWEET_FAILURE,
+      error: err.response.data,
+    });
+  }
+}
+
+
+
+
+
+////////////////////////////////////////////////////// GENERATE FUNCTION - yield 3
+
+function* watchLoadPosts() {
+  yield throttle(5000, LOAD_POSTS_REQUEST, loadPosts);
+}
+
+function* watchAddPost() {
+  //yield take('ADD_POST', addpost);  // ver-1. take는 일회용 - 로그인1번, 게시글도1번만
+  yield takeLatest(ADD_POST_REQUEST, addPost); // ver-2. 3번요청  →  응답 1번
+  //  yield throttle('ADD_POST', addpost , 10000); ver-3. 몇초뒤에 실행, 시간설정가능-10초뒤에
+}
+
+function* watchUpdatePost() {
+  yield takeLatest(UPDATE_POST_REQUEST, updatePost);
+}
+
+function* watchRemovePost() {
+  yield takeLatest(REMOVE_POST_REQUEST, removePost);
+}
+
+function* watchAddComment() {
+  yield takeLatest(ADD_COMMENT_REQUEST, addComment);
+}
+
+function* watchUploadImages() {
+  yield takeLatest(UPLOAD_IMAGES_REQUEST, uploadImages);
+}
+
+//--
+
+
+function* watchLikePost() {
+  yield takeLatest(LIKE_POST_REQUEST, likePost);
+}
+
+function* watchUnlikePost() {
+  yield takeLatest(UNLIKE_POST_REQUEST, unlikePost);
+}
+
+
+//-- 
+
+function* watchLoadPost() {
+  yield takeLatest(LOAD_POST_REQUEST, loadPost);
+}
+
+function* watchLoadHashtagPosts() {
+  yield throttle(5000, LOAD_HASHTAG_POSTS_REQUEST, loadHashtagPosts);
+}
+
+function* watchLoadUserPosts() {
+  yield throttle(5000, LOAD_USER_POSTS_REQUEST, loadUserPosts);
+}
+
+function* watchRetweet() {
+  yield takeLatest(RETWEET_REQUEST, retweet);
+}
+
+
+
+
+////////////////////////////////////////////////////// STEP1) SERVER API
+export default function* postSaga() {
+  yield all([  //  all - 동시에 배열로 받은 fork들을 동시에 실행 
+    fork(watchLoadPosts),
     fork(watchAddPost),
-    fork(watchAddComment),
+    fork(watchUpdatePost),
     fork(watchRemovePost),
-    fork(watchLoadPosts)
+    fork(watchAddComment),
+    fork(watchUploadImages),
+
+    fork(watchLikePost),
+    fork(watchUnlikePost),
+
+    fork(watchRetweet),
+    fork(watchLoadPost),
+    fork(watchLoadUserPosts),
+    fork(watchLoadHashtagPosts),
   ]);
 }
-
-// fork - generator 함수들을 실행해줌.
-// all - 동시에 배열로 받은 fork들을 동시에 실행
-// yield
