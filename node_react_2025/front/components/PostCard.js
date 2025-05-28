@@ -6,7 +6,7 @@ import CommentForm from './commentForm';
 import { useDispatch, useSelector } from 'react-redux';
 
 //1. REMOVE_POST_REQUEST
-import { REMOVE_POST_REQUEST } from '../reducers/post';
+import { REMOVE_POST_REQUEST,LIKE_POST_REQUEST,UNLIKE_POST_REQUEST } from '../reducers/post';
 
 const PostCard = ({post}) => { 
   ///////////////////////////////////////////// code
@@ -15,8 +15,24 @@ const PostCard = ({post}) => {
   const dispatch=useDispatch();
 
   //1. 좋아요 - false
-  const [like,setLike] = useState(false);
-  const onClickLike = useCallback(()=>{setLike((prev) =>!prev); },[]);
+  //const [like,setLike] = useState(false);
+  const onClickLike = useCallback(()=>{
+    if(!id){return alert('로그인을 하시면 좋아요 추가가 가능합니다.');}
+    return dispatch({
+      type:LIKE_POST_REQUEST,
+      data:post.id
+    });
+  },[id]);
+
+  const onClickUnLike = useCallback(()=>{
+    if(!id){return alert('로그인을 하시면 좋아요 추가가 가능합니다.');}
+    return dispatch({
+      type:UNLIKE_POST_REQUEST,
+      data:post.id
+    });
+  },[id]);
+
+  const like = post.Likers?.find((v)=>v.id==id); //내가 눌렀는지 체크
 
   //2. 댓글
   const [commentOpened, setCommentOpened] = useState(false);
@@ -44,14 +60,14 @@ const PostCard = ({post}) => {
       actions={[
         <RetweetOutlined key="retweet"/>,
         like?
-        <HeartTwoTone twoToneColor="#f00" key="heart" onClick={onClickLike}/>
+        <HeartTwoTone twoToneColor="#f00" key="heart" onClick={onClickUnLike}/>
         : <HeartOutlined key="heart" onClick={onClickLike}/>,
         <MessageOutlined key="comment" onClick={onClickComment}/>,
         <Popover content={(
           <Button.Group>
             { id&& id === post.User.id
             ?( <><Button>수정</Button>
-              <Button type="danger" onClick={onRemovePost} dsfaloading={removePostLoading} >삭제</Button></>
+              <Button type="danger" onClick={onRemovePost} loading={removePostLoading} >삭제</Button></>
             ) 
             :  <Button>신고</Button>
             }

@@ -10,6 +10,9 @@ const {isLoggedIn} = require('./middlewares');
 const { where } = require('sequelize');
 const { error } = require('console');
 
+//c(Create)r(findOne,findAll)ud
+
+
 /////폴더 존재여부확인
 try {
   fs.accessSync('uploads'); //폴더 존재여부 확인

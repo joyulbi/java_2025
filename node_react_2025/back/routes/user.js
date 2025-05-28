@@ -115,7 +115,7 @@ router.post('/logout',isLoggedIn,async(req,res,next)=>{
 
 //5.닉네임변경
 // POST : localhost:3065/user/nicnkame 닉네임변경출력
-router.post('/nickname',isLoggedIn,async (req,res,next)=>{
+router.patch('/nickname',isLoggedIn,async (req,res,next)=>{
   //res.send('닉네임변경');
   try {
     await User.update({
@@ -123,7 +123,7 @@ router.post('/nickname',isLoggedIn,async (req,res,next)=>{
     },{
       where:{id:req.user.id}
     });
-    res.status(200).json({});
+    res.status(200).json({nickname:req.body.nickname});
   }catch(error){
     console.error(error);
     next(error);

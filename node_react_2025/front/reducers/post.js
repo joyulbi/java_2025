@@ -217,9 +217,9 @@ const reducer = (state = initialState, action) => produce(state, (draft) => {
       draft.addCommentError = null;
       break;
     case ADD_COMMENT_SUCCESS: {
-      const post = draft.mainPosts.find((v) => v.id === action.data.PostId);
-      post.Comments.unshift(action.data);
-      draft.addCommentLoading = false;
+      const post = draft.mainPosts.find((v) => v.id === action.data.PostId); //게시물찾기
+      post.Comments.unshift(action.data); //추가
+      draft.addCommentLoading = false; //상태
       draft.addCommentDone = true;
       break;
     }
