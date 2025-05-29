@@ -2,9 +2,11 @@ const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcrypt');
 const passport = require('passport');
-const {User,Post} = require('../models');
+const {User,Post,Image,Comment} = require('../models');
 const {isLoggedIn,isNotLoggedIn} = require('./middlewares');
 const { Model } = require('sequelize');
+const { Op } = require('sequelize');
+
 
 // 1. 회원가입 localhost:3065/user/
 // 설정1: Header Content-Type : application/json
@@ -226,6 +228,67 @@ router.delete('/follower/:userId',isLoggedIn,async(req,res,next)=>{ //##
     console.error(error);
     next(error);
   }
+});
+
+//11. 각유저별 해당정보  GET    /user/1
+router.get('/:userId', async  (req, res, next) => {  
+  try { 
+    //1) 로그인사용자확인
+    //2) 로그인한유저 정보반환 
+      const fullUser = await User.findOne({
+        where : { id: req.params.userId } , // 조건 :  id로 검색
+        attributes : { exclude : ['password'] } ,// 비밀번호 빼고 결과가져오기
+        include: [
+            { model: Post , attributes : ['id']  }
+          , { model: User , as :'Followings' , attributes : ['id'] }
+          , { model: User , as :'Followers'  , attributes : ['id'] }
+        ]// Post, Followers , Followings
+      });
+      if (fullUser) { 
+        const data = fullUser.toJSON();
+        data.Posts = data.Posts.length;
+        data.Followers = data.Followers.length;
+        data.Followings = data.Followings.length;
+        res.status(200).json(data);
+        console.log(  '............ user/번호',data);
+      } else {
+        res.status(404).json('유저를 확인해주세요.');
+      }
+  } catch (error) {
+    console.error(error);
+    next(error);
+  }
+});
+
+//12. 해당유저의 포스트 가져오기
+router.get('/:userId/posts',async(req,res,next)=>{
+  try{
+    const where = {UserId:req.params.userId};
+    // 맨마지막에서 10개 카운트시 글중간에 추가 + 11 10,,,
+    if (parseInt(req.query.lastId,10)){where.id={[Op.lt]:parseInt(req.query.lastId,10)};}
+    const posts = await Post.findAll({
+      where,
+      limit:10,
+      order:[
+        ['createdAt','DESC'],
+        [Comment,'createdAt','DESC'],
+      ],
+      include:[
+        {model:User,attributes:['id','nickname']},
+        {model:Image},
+        {model:Comment,include:[{model:User,attributes:['id','nickname']}]},
+        {model:User,as:'Likers',attributes:['id']},
+        {model:Post,as:'Retweet',include:[{model:User,attributes:['id','nickname']},{model:Image}]}
+        //원본글 작성자와 이미지 포함.
+      ]
+
+    });
+    res.status(200).json(posts);
+  }catch(error){
+    console.error(error);
+    next(error);    
+  }
+  
 });
 
 

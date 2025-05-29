@@ -51,7 +51,7 @@ const Signup = () => {
   } , [password]);
 
 
-  const [check, setCheck] = useState('');
+  const [check, setCheck] = useState(false);
   const [checkError, setCheckError] = useState(false);
   const onChangeCheck = useCallback((e) => {   //console.log(e.target.checked);
     setCheck(e.target.checked);     // true
@@ -60,9 +60,12 @@ const Signup = () => {
 
   const onSubmitForm = useCallback(() => { 
     if (password !== passwordRe) { return setPasswordError(true); }
-    if (!check) { setCheckError(true); }
+    if (!check) {
+      setCheckError(true);
+      return;
+      }
 
-    return dispatch({
+    dispatch({
       type:SIGN_UP_REQUEST,
       data:{email,password,nickname}
     });

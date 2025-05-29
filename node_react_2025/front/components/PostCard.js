@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 //1. REMOVE_POST_REQUEST
 import { REMOVE_POST_REQUEST,LIKE_POST_REQUEST,UNLIKE_POST_REQUEST } from '../reducers/post';
+import FollowButton from './FollowButton';
 
 const PostCard = ({post}) => { 
   ///////////////////////////////////////////// code
@@ -77,6 +78,7 @@ const PostCard = ({post}) => {
           <EllipsisOutlined key="more"/>
         </Popover>
       ]}
+      extra={id && <FollowButton post={post}/>}
     >
       <Card.Meta avatar={<Avatar>{post.User.nickname[0]}</Avatar>} 
         title={post.User.nickname} 
