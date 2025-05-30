@@ -5,19 +5,34 @@ import { Menu, Input, Row, Col  } from 'antd';
 import UserProfile from './UserProfile';
 import LoginForm from './LoginForm';
 import styled from 'styled-components';
-
+import Router from 'next/router'
 import {useSelector} from 'react-redux';
+import userInput from '../hooks/userInput';
+import { useCallback } from 'react';
+
 
 const InputSearch = styled(Input.Search)`vertical-align:middle;`;
 
 
 const AppLayout = ({ children }) => { 
+  //const stylebg = useMemo(()=>({backgroundColor:'#efefef'}),[]);
+  //const {user} = useSelector(state => state.user);
+  const [searchInput, onChangeSearchInput] = userInput('');
+  const onSearch = useCallback(()=>{
+    Router.push(`/hashtag/${searchInput}`);
+  },[searchInput]);
   ///////////////////////////////////////////// code
   const items = [
      { label: <Link href="/">LOGO</Link>, key: '/' } 
     ,{ label: <Link href="/profile">PROFILE</Link>, key: '/profile' }
     ,{ label: <Link href="/signup">SIGNUP</Link>, key: '/signup' }
-    ,{ label: <InputSearch  placeholder="input search text" enterButton/>, key: '/search'
+    ,{ label: <InputSearch 
+      placeholder="input search text"
+      enterButton
+      value={searchInput}
+      onChange={onChangeSearchInput}
+      onSearch={onSearch}
+      />, key: '/search'
     }
   ];
 
