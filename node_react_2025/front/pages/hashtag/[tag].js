@@ -36,7 +36,7 @@ const Hashtag = () => {
   useEffect(()=>{
     function onScroll(){
       if (window.screenY+document.documentElement.clientHeight>document.documentElement.scrollHeight-200) {
-        if (hasMorePosts&&!loadPostsLoading) {
+        if (hasMorePosts&&!loading) {
           axios.get(`http://localhost:3065/hashtag/${tag}?lastId=${mainPosts[mainPosts.length-1]?.id}`,{withCredentials:true})
           .then((response)=>{
             setMainPosts((prev=>[...prev, ...response.data]));
