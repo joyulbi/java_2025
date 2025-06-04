@@ -9,6 +9,7 @@ const { Post, User, Image, Comment, Hashtag } = require('../models');
 const { isLoggedIn } = require('./middlewares');
 const { where } = require('sequelize');
 const { error } = require('console');
+const comment = require('../models/comment');
 
 //c(Create)r(findOne,findAll)ud
 
@@ -156,12 +157,12 @@ router.patch('/:postId', isLoggedIn, async (req, res, next) => {
     if (hashtags) { //해쉬태그가 존재한다면
       const result = await Promise.all(hashtags.map( //해쉬태그들 다시 조립
         (tag) => Hashtag.findOrCreate({ // DB : 찾거나 생성하거나
-          where: {name:tag.slice(1).toLowerCase()},
+          where: { name: tag.slice(1).toLowerCase() },
         })
       )); // [node, true]
       await post.setHashtags(result.map((v) => v[0]));
     }
-    res.status(200).json({PostId:parseInt(req.params.postId,10),content:req.body.content});
+    res.status(200).json({ PostId: parseInt(req.params.postId, 10), content: req.body.content });
   } catch (error) {
     console.error(error);
     next(error);
@@ -247,5 +248,58 @@ router.post('/:postId/comment', isLoggedIn, async (req, res, next) => {
   }
 });
 
-//7.리트윗
+//7. 리트윗
+// POST : localhost:3065/post/게시글번호/retweet
+// POST : localhost:3065/post/:postId/retweet
+
+router.post('/:postId/retweet', isLoggedIn, async (req, res, next) => {
+  try {
+    //1. 기존게시글 확인 - findOne
+    const post = await Post.findOne({
+      where: { id: req.params.postId },
+      include: [{ model: Post, as: 'Retweet' }]
+    });
+    if (!post) { return res.status(403).send('게시글을 확인해주세요'); }
+
+    //2. 리트윗 - 조건확인 : 유저가 본인글인지 확인 || 리트윗 한적 있는지 확인
+    if (req.user.id === post.UserId
+      || (post.Retweet && post.Retweet.UserId == req.user.id)
+    ) { return res.status(403).send('본인 게시물은 리트윗 할 수 없습니다.'); }
+
+    //3. 리트윗할 게시글 번호
+    const retweetTargetId = post.RetweetId || post.id
+
+    //4. 중복 리트윗 여부
+    const exPost = await Post.findOne({
+      where: { UserId: req.user.id, RetweetId: retweetTargetId, }
+    })
+    if (exPost) { return res.status(403).send('이미 리트윗한 게시물입니다.') }
+
+    //5. 리트윗 생성 - create
+    const retweet = await Post.create({
+      UserId: req.user.id, RetweetId: retweetTargetId, content: 'retweet',
+    });
+
+    //6. 리트윗 싱세조회
+    const retweetDetail = await Post.findOne({
+      where: { id: retweet.id },
+      include: [
+        {model: Post, as: 'Retweet', include: [
+            { model: User, attributes: ['id', 'nickname'] },
+            { model: Image },
+          ]},
+        { model: User, attributes: ['id', 'nickname'] },
+        { model: Image },
+        { model: Comment, include: [{ model: User, attributes: ['id', 'nickname'] },] },]
+    });
+
+    //7. res 응답
+    res.status(201).json(retweetDetail);
+
+  } catch (error) {
+    console.error(error)
+    next(error)
+  }
+});
+
 module.exports = router;

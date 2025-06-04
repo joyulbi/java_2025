@@ -12,7 +12,7 @@ const PostImages=({images})=>{
     return(
       <>
         <img role="presentation" src={`http://localhost:3065/${images[0].src}`} alt={images[0].src} onClick={onZoom}/>
-        {showImageZoom && <ImageZoom images={images} onClose={onClose}/>}
+        {showImageZoom && <ImagesZoom images={images} onClose={onClose}/>}
       </>
     );
   }

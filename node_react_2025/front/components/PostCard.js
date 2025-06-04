@@ -4,13 +4,16 @@ import { DingdingOutlined, EllipsisOutlined, HeartOutlined, HeartTwoTone, Messag
 import PostImages from './PostImages';
 import CommentForm from './CommentForm';
 import PostCardContent from './PostCardContent';
+import FollowButton from './FollowButton';
 import { useDispatch, useSelector } from 'react-redux';  //2. ## useDispatch
 import PropTypes from 'prop-types';
 
 //1. ## REMOVE_POST_REQUEST 
-import { REMOVE_POST_REQUEST, LIKE_POST_REQUEST, UNLIKE_POST_REQUEST, UPDATE_POST_REQUEST } from '../reducers/post';
-import FollowButton from './FollowButton';
-
+import {
+  REMOVE_POST_REQUEST, LIKE_POST_REQUEST, UNLIKE_POST_REQUEST, UPDATE_POST_REQUEST,
+  RETWEET_REQUEST
+} from '../reducers/post';
+import Link from 'next/Link';
 
 const PostCard = ({ post }) => {
   const id = useSelector((state) => state.user.user?.id);
@@ -70,14 +73,20 @@ const PostCard = ({ post }) => {
   }, [post]);
 
   // 5. 리트윗
-
+  const onRetweet = useCallback(() => {
+    if (!id) { return alert('로그인 후 리트윗이 가능합니다.'); }
+    return dispatch({
+      type: RETWEET_REQUEST,
+      data: post.id
+    });
+  });
 
   ///////////////////////////////////////////////////// view
   return (<div style={{ margin: '3%' }}>
     <Card
       cover={post.Images && post.Images.length > 0 && <PostImages images={post.Images} />}
       actions={[
-        <RetweetOutlined key="retweet" />,
+        <RetweetOutlined key="retweet" onClick={onRetweet} />,
         like
           ? <HeartTwoTone twoToneColor="#f00" key="heart" onClick={onClickUnLike} />
           : <HeartOutlined key="heart" onClick={onClickLike} />,
@@ -97,17 +106,33 @@ const PostCard = ({ post }) => {
           <EllipsisOutlined />
         </Popover>
       ]}
+      title={post.RetweetId ? `${post.User.nickname}님이 리트윗 하셨습니다.` : null}
       extra={id && id !== post.User.id && <FollowButton post={post} />}
     >
-
-      <Card.Meta avatar={<Avatar>{post.User.nickname[0]}</Avatar>}
-        title={post.User.nickname}
-        description={<PostCardContent
-          editMode={editMode}
-          onChangePost={onEditPost}
-          onCancelUpdate={onCancelUpdate}
-          postData={post.content} />}
-      />
+      {post.RetweetId && post.Retweet ? (
+        <Card cover={post.Retweet.Images[0] && <PostImages images={post.Retweet.Images} />}>
+          <Card.Meta
+            avatar={<Link href={`/user/${post.Retweet.User.id}`} prefetch={false}>
+              <Avatar>{post.Retweet.User.nickname[0]}</Avatar></Link>}
+            title={post.Retweet.User.nickname}
+            description={<PostCardContent
+              editMode={editMode}
+              onChangePost={onEditPost}
+              onCancelUpdate={onCancelUpdate}
+              postData={post.Retweet.content} />}
+          />
+        </Card>
+      ) : (
+        <Card.Meta
+          avatar={<Link href={`/user/${post.User.id}`} prefetch={false}><Avatar>{post.User.nickname[0]}</Avatar></Link>}
+          title={post.User.nickname}
+          description={<PostCardContent
+            editMode={editMode}
+            onChangePost={onEditPost}
+            onCancelUpdate={onCancelUpdate}
+            postData={post.content} />}
+        />
+      )}
     </Card>
     {commentOpen && (
       <>
