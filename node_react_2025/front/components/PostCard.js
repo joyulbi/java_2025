@@ -1,12 +1,12 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import { Card, Avatar, Button, List, Comment, Popover } from 'antd';
-import { DingdingOutlined, EllipsisOutlined, HeartOutlined, HeartTwoTone, MessageOutlined, RetweetOutlined } from '@ant-design/icons';
+import { DingdingOutlined, EllipsisOutlined, HeartOutlined, HeartTwoTone, MessageOutlined, RetweetOutlined, ShareAltOutlined } from '@ant-design/icons';
 import PostImages from './PostImages';
 import CommentForm from './CommentForm';
 import PostCardContent from './PostCardContent';
 import FollowButton from './FollowButton';
 import { useDispatch, useSelector } from 'react-redux';  //2. ## useDispatch
-import PropTypes from 'prop-types';
+import PropTypes, { object } from 'prop-types';
 
 //1. ## REMOVE_POST_REQUEST 
 import {
@@ -39,7 +39,8 @@ const PostCard = ({ post }) => {
     });
   }, [id]);
 
-  const like = post.Likers?.find((v) => v.id === id);  // 내가 눌렀는지 체크
+ 
+
 
   //2. 댓글 -  댓글의 상태체크 / 댓글처음에는 안보이게, 클릭하면  토글기능
   const [commentOpen, setCommentOpen] = useState(false);
@@ -79,7 +80,34 @@ const PostCard = ({ post }) => {
       type: RETWEET_REQUEST,
       data: post.id
     });
+
   });
+  
+  const like = post.Likers?.find((v) => v.id === id);  // 내가 눌렀는지 체크
+  /////////////////////////////////////////////////////////////////////////
+
+  const loadKakaoSDK = () => {
+    const script = document.createElement("script"); //script 태그만들기
+    script.src = "https://developers.kakao.com/sdk/js/kakao.js"; // script src=""
+    script.async = true;
+    script.onload = () => {
+      if (window.Kakao) { window.Kakao.init("c9a89692b607ff0542f7261e58f6230c"); } //js앱키
+    };
+    document.head.appendChild(script);
+  };
+
+  useEffect(() => { loadKakaoSDK(); }, []);
+
+  const shareToKakao = (postId) => {
+    window.Kakao.Link.sendDefault({
+      objectType: "text",
+      text: "이 링크를 확인해보세요!",
+      link: {
+        mobileWebUrl: `http://localhost:3000/post/${postId}`,
+        webUrl: `http://localhost:3000/post/${postId}`,
+      },
+    });
+  };
 
   ///////////////////////////////////////////////////// view
   return (<div style={{ margin: '3%' }}>
@@ -104,7 +132,8 @@ const PostCard = ({ post }) => {
           </Button.Group>
         )}>
           <EllipsisOutlined />
-        </Popover>
+        </Popover>,
+        <ShareAltOutlined key="share" onClick={()=>shareToKakao(post.id)}/>
       ]}
       title={post.RetweetId ? `${post.User.nickname}님이 리트윗 하셨습니다.` : null}
       extra={id && id !== post.User.id && <FollowButton post={post} />}

@@ -1,8 +1,8 @@
-//import produce from '../util/produce';
-import shortId from 'shortid';  //##
-import produce from 'immer';
-import { faker } from '@faker-js/faker';
-faker.seed(123);
+import produce from '../util/produce';
+// import shortId from 'shortid';  //##
+// import produce from 'immer';
+// import { faker } from '@faker-js/faker';
+// faker.seed(123);
 
 ////////////////////////////////////////////////////// 초기값
 export const initialState = {

@@ -6,10 +6,11 @@ import  styled from 'styled-components';
 import userInput from '../hooks/userInput';
 import Router from 'next/router';
 
-//1. SIGN_UP_REQUEST
-import { SIGN_UP_REQUEST } from '../reducers/user';
-//2. dispatch, useSelector
+import { SIGN_UP_REQUEST,LOAD_MY_INFO_REQUEST } from '../reducers/user';
 import { useDispatch,useSelector } from 'react-redux';
+import axios from 'axios';
+import { END } from 'redux-saga';
+import wrapper from '../store/configureStore';
 
 const ErrorMessage = styled.div`color:red;`;   //style.div( color:red; )
 
@@ -119,5 +120,20 @@ const Signup = () => {
     </>
   );
 };
+///////////////////////////////////////////////////////////
+export const getServerSideProps = wrapper.getServerSideProps(async (context) => { 
+  //1. cookie 설정
+  const cookie = context.req ? context.req.headers.cookie : '';
+  axios.defaults.headers.Cookie = '';
+  
+  if (context.req  && cookie ) { axios.defaults.headers.Cookie = cookie;   }
 
+  //2. redux 액션
+  context.store.dispatch({ type:LOAD_MY_INFO_REQUEST});
+  //context.store.dispatch({ type: LOAD_POSTS_REQUEST });
+  context.store.dispatch(END);
+
+  await  context.store.sagaTask.toPromise();
+}); 
+///////////////////////////////////////////////////////////
 export default Signup;
