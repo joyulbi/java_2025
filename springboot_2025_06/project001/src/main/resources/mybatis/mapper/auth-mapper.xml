@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.company.project001.dao.AuthDao">
+	<resultMap type="AuthDto" id="authMap">
+		<result property="userid" column="userid"/>
+		<result property="auth" column="auth"/>
+	</resultMap>
+
+	<resultMap type="UserDto" id="userMap">
+		<id 		property="userid" column="userid" /> <!-- 기본키 -->
+		<result 	property="userpw" column="userpw" /> 
+		<collection property="authList" resultMap="authMap"/>
+	</resultMap>
+	
+	<select resultMap="userMap" id="readAuth" parameterType="UserDto">
+		select 	m.userid, userpw, auth
+		from 	users m left join authorities a on m.userid = a.userid
+		where 	m.userid =#{userid}
+	</select>
+	
+</mapper>
