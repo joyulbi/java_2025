@@ -11,13 +11,11 @@ import org.springframework.security.oauth2.core.user.OAuth2User;
 import com.company.project001.domain.Member;
 
 public class MemberUserDetails implements UserDetails, OAuth2User {
+	
 	private static final long serialVersionUID = 1L;
 	private Member member;
+	public MemberUserDetails(Member member) { super(); this.member = member; }
    
-   public MemberUserDetails(Member member) {
-      super();
-      this.member = member;
-   }
    ///////////////////////////////////////////
    // 권한작업 role
    @Override public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -37,7 +35,20 @@ public class MemberUserDetails implements UserDetails, OAuth2User {
    @Override public boolean isCredentialsNonExpired() { return true; }
    // 계정 활성화(사용가능)
    @Override public boolean isEnabled() { return true; }
+   
    ///////////////////////////////////////////
+   
+   private Map<String, Object> attributes;
+   
+   // alt + shift +s 
+   public MemberUserDetails(Member member, Map<String, Object> getAttributes) {
+	super();
+	this.member = member;
+	this.attributes = attributes;
+   }
+
    @Override public Map<String, Object> getAttributes() { return null; }
-   @Override public String getName() { return null; }
+   @Override public String getName() { return member.getUsername(); }
+   public String getNickname() { return member.getNickname(); }
+   public String getEmail() { return member.getEmail(); }
 }
