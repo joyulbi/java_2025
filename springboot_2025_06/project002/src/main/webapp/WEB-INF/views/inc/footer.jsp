@@ -3,7 +3,7 @@
   <a href="#myPage" title="To Top">
     <span class="glyphicon glyphicon-chevron-up"></span>
   </a>
-  <p>copyrights &copy; CompanyName  2025 all rights reserved. </p>
+  <p>copyrights &copy; CompanyName  2020 all rights reserved. </p>
 </footer>
 
 <script>

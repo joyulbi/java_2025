@@ -7,3 +7,6 @@
 node_modules/
 /springboot2025/boot008_api/src/main/resources/application-oauth.properties
 .next/
+/springboot_2025_06/project002/src/main/resources/application-oauth.properties
+/springboot_2025_06/project003/src/main/resources/application-oauth.properties
+/springboot_2025_06/project004/src/main/resources/application-oauth.properties

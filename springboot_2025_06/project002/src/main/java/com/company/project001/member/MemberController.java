@@ -17,61 +17,64 @@ import com.company.project001.domain.Member;
 public class MemberController {
    @Autowired MemberService memberService;
    
-   ////////////////////////////////////////////////////////
    @GetMapping("/")
-   public String home() { return "test"; }
+   public String home() {
+      return "test";
+   }
    
    @GetMapping("/member/member")
-   public String member(Authentication authentication, Model model) { 
-      if(authentication == null) { return "redirect:member/login";}
+   public String member(Authentication authentication, Model model) {
+      if(authentication != null) {
+         return "redirect:/member/login";
+      }
       Member member = memberService.findByUsername(authentication.getName());
       model.addAttribute("dto", member);
-      return "member/member"; 
-      }
+      return "member/member";
+   }
+   ///////////////////////////////////////////////////////
+   @GetMapping("/member/login")  // 로그인 폼
+   public String login_get(MemberLoginForm memberLoginForm) {
+      return "member/login";
+   }
    
-   /////////
-   @GetMapping("/member/login")
-   public String login_get(MemberLoginForm memberLoginForm) { return "member/login"; }
-   
-   @PostMapping("/member/login") // 로그인 유효성 검사한 결과값 + 로그인 기능
-   public String login_post(@Valid MemberLoginForm memberLoginForm, BindingResult result) { 
+   @PostMapping("/member/login")  // 로그인유효성검사 결과값 + 로그인기능
+   public String login_post(@Valid MemberLoginForm memberLoginForm, BindingResult result) {
       if(result.hasErrors()) {
-         System.out.println(result.hasErrors());
-         return "member/login";}
-      return "redirect:/member/member"; 
-      
-   } 
+         return "member/login";
+      }
+      return "redirect:/member/member";
+   }
+   ///////////////////////////////////////////////////////
+   @GetMapping("/member/join")  // 회원가입 폼
+   public String join_get(MemberJoinForm memberJoinForm) {
+      return "member/join";
+   }
    
-   ////////////
-   @GetMapping("/member/join")
-   public String join_get(MemberJoinForm memberJoinForm) { return "member/join"; }
-   
-   @PostMapping("/member/join")
+   @PostMapping("/member/join")  // 회원가입할 검사 결과값 + 회원가입기능
    public String join_post(@Valid MemberJoinForm memberJoinForm, BindingResult result) {
-      if(result.hasErrors()) {return "member/join";}
-      if(! memberJoinForm.getPassword().equals(memberJoinForm.getPassword2())) {
-         result.rejectValue("password2", "passwordInCorrect", "패스워드를 확인해주세요.");
+      if(result.hasErrors()) {
+         return "member/join";
+      }
+      if(!memberJoinForm.getPassword().equals(memberJoinForm.getPassword2())) {
+         result.rejectValue("password2", "passwordInCorrect", "패스워드를 확인해주세요");
          return "member/join";
       }
       
       try {
-      Member member = new Member();
-      member.setNickname(memberJoinForm.getUsername());
-      member.setUsername(memberJoinForm.getUsername());
-      member.setPassword(memberJoinForm.getPassword());
-      member.setEmail(memberJoinForm.getEmail());
-      memberService.insert(member);
+         Member member = new Member();
+         member.setUsername(memberJoinForm.getUsername());
+         member.setPassword(memberJoinForm.getPassword());
+         member.setEmail(memberJoinForm.getEmail());
+         memberService.insert(member);
       } catch(DataIntegrityViolationException e) {
          e.printStackTrace();
-         result.reject("faild", "등록된 유저입니다.");
+         result.reject("failed", "등록된 유저입니다.");
          return "member/join";
-      } catch (Exception e) {
+      } catch(Exception e) {
          e.printStackTrace();
-         result.reject("faild", e.getMessage());
+         result.reject("failed", e.getMessage());
          return "member/join";
       }
-      
-      return "redirect:/member/login"; 
+      return "redirect:/member/login";
    }
-   
 }
