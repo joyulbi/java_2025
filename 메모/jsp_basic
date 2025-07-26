@@ -1,0 +1,69 @@
+---
+
+## 🌐 JSP/Servlet 기초 학습 프로젝트 (jsp_basic)
+
+> JSP와 Servlet 기반의 웹 개발 흐름을 실습한 Eclipse Dynamic Web Project입니다.
+
+---
+
+## 📌 프로젝트 소개
+
+`jsp_basic` 프로젝트는 JSP(Java Server Pages) 및 Servlet 기반 웹 개발의 기초 개념을  
+예제 중심으로 익히기 위한 학습용 프로젝트입니다.  
+HTML → JSP → Servlet → DB 연동 → MVC 패턴까지 점진적으로 실습할 수 있도록 구성되어 있습니다.
+
+---
+
+## 📁 디렉토리 구조
+
+| 경로 | 설명 |
+|------|------|
+| `src/main/java/jsp023_servlet/` | Servlet 실습 및 DB 연동 예제 |
+| `src/main/java/jsp026_frontcontroller/` | FrontController 패턴 구현 |
+| `src/main/webapp/` | JSP 문법, 요청/응답, 로그인, 점수 계산 등 실습 JSP 페이지 |
+| `.settings/` | Eclipse Web 설정 파일 |
+
+---
+
+## 🧪 포함 예제
+
+| 항목 | 주요 파일 | 설명 |
+|------|-----------|------|
+| JSP 문법 | `jsp002_jsp.jsp`, `jsp003_tmpt.jsp` | 스크립틀릿, 선언부, 표현식 |
+| 요청/응답 | `jsp004_request.jsp`, `jsp005_request_google.jsp` | request/response 객체 실습 |
+| 로그인 처리 | `jsp008_login.jsp`, `jsp008_result.jsp` | 로그인 폼과 결과 처리 |
+| Servlet 실습 | `Servlet001.java`, `Servlet002.java` | 기본 Servlet 구조 |
+| DB 연동 | `DBManager.java`, `Jsp025_Join.java` | JDBC 기반 회원가입 처리 |
+| MVC 패턴 | `FrontController.java` | Front Controller 기반 흐름 구현 |
+
+---
+
+## 🛠 사용 기술
+
+| 기술 | 설명 |
+|------|------|
+| JSP | 동적 웹페이지 렌더링 |
+| Servlet | 요청 처리 및 비즈니스 로직 |
+| JDBC | MySQL 등과의 DB 연동 |
+| MVC Pattern | Controller 중심 분기 처리 구조 |
+| Eclipse | Dynamic Web Project 기반 구성 |
+| Tomcat | 로컬 서버 실행 |
+
+---
+
+## 🚀 실행 방법
+
+1. Eclipse에서 "Dynamic Web Project"로 import
+2. Tomcat 서버 연결 후 프로젝트 배포
+3. 브라우저에서 `http://localhost:8080/jsp_basic/` 접속
+4. 각 JSP 또는 Servlet 경로 테스트
+
+---
+
+## 🙋‍♀️ 작성자
+
+- GitHub: [joyulbi](https://github.com/joyulbi)
+- 프로젝트 목적: 웹 개발 기초부터 서버 구성까지의 실습 반복 및 구조 이해
+
+---
+
