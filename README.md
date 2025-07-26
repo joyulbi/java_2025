@@ -48,3 +48,42 @@
 - Git 브랜치 전략 수립 및 협업 기반 PR 관리
 - GitHub, Notion, Jira, Slack을 활용한 실시간 협업 및 일정 관리
 - Spring Boot + React 기반 풀스택 환경 구성 및 운영 자동화 적용 경험
+
+
+# 📚 Backend 학습 프로젝트 모음 (2025)
+
+> Java 기초부터 Spring Boot까지 실습하며 웹 백엔드 개발 구조를 익힌 프로젝트 모음입니다.  
+각 프로젝트는 GitHub 저장소 내 별도 디렉토리로 정리되어 있으며, 아래에서 확인하실 수 있습니다.
+
+---
+
+## 🗂️ 공부 목록
+
+### ☕ 1. Java 기초 문법 실습
+- 객체지향, 변수/자료형, 연산자 등 핵심 개념 실습
+- ✔️ [바로가기]
+
+---
+
+### 🌐 2. JSP / Servlet 웹 개발 실습
+- MVC1, MVC2 패턴 기반 JSP + Servlet 구조 이해
+- ✔️ [바로가기]
+
+---
+
+### 🌱 3. Spring MVC + MyBatis 통합 구조 실습
+- Controller → Service → DAO 흐름, AOP/트랜잭션 기반 기능 구현
+- ✔️ [바로가기]
+---
+
+### 🚀 4. Spring Boot + MyBatis 기반 웹 앱 실습
+- Spring Boot 기반 통합 백엔드 환경 구성 및 MyBatis 매핑 처리
+- ✔️ [바로가기]
+
+---
+
+## 🙋‍♀️ 작성자
+
+- GitHub: [joyulbi](https://github.com/joyulbi)
+- 포트폴리오 개요 및 프로젝트 소개는 각 폴더의 README를 참고해주세요!
+
