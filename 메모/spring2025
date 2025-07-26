@@ -1,78 +1,115 @@
----
+# 🌱 Spring 기반 웹 개발 통합 학습 프로젝트
 
-## 🌱 Spring MVC 학습 프로젝트 (spring2025)
-
-> Java 기반 Spring Framework의 MVC 구조와 MyBatis, AOP, 로그 설정 등을 실습한 웹 프로젝트입니다.
+> Spring MVC와 Spring Boot 구조를 단계적으로 실습하며 웹 백엔드 개발 흐름을 익히기 위한 학습형 프로젝트입니다.
 
 ---
 
-## 📌 프로젝트 소개
+## 📌 구성 개요
 
-이 프로젝트는 Spring MVC 아키텍처를 중심으로  
-Controller → Service → DAO → DB 흐름을 익히고,  
-MyBatis와 AOP, 로깅(Log4j)까지 실전 웹 개발의 핵심 요소들을 경험해볼 수 있도록 구성되었습니다.
-
----
-
-## 🧩 주요 기능 및 구성
-
-| 계층 | 주요 클래스 |
-|------|-------------|
-| Controller | `BoardController.java`, `IndexController.java`, `HomeController.java` |
-| Service | `BoardService.java`, `BoardServiceImpl.java` |
-| DAO | `BoardDao.java`, `UserDao.java`, `MyDao.java` 등 |
-| DTO | `BoardDto.java`, `UserDto.java`, `TestDto.java` |
-| AOP | `AopTrace.java` (메서드 호출 로그 추적용) |
+| 프로젝트 | 설명 |
+|----------|------|
+| `spring2025` | Spring MVC + MyBatis + JSP + AOP |
+| `project001` | Spring Boot + MyBatis + JSP + Logback |
 
 ---
 
-## ⚙ 설정 파일
+## 📁 디렉토리 구조
 
-| 파일 경로 | 설명 |
-|-----------|------|
-| `pom.xml` | Maven 의존성 관리 |
-| `config/db.properties` | DB 접속 정보 설정 |
-| `config/mybatis-config.xml` | MyBatis 설정 파일 |
-| `config/board-mapper.xml` | 쿼리 매핑 파일 |
-| `log4j.xml` / `log4jdbc.log4j2.properties` | 로그 기록 설정 (SQL 포함) |
+spring2025/
+└── projectName/
+├── src/main/java/
+│ ├── controller/
+│ ├── dao/
+│ ├── dto/
+│ ├── service/
+│ └── aop/
+└── src/main/resources/
+├── config/
+├── mybatis-config.xml
+└── log4j.xml
+
+springboot_2025_06/
+└── project001/
+├── src/main/java/
+│ ├── controller/
+│ ├── dao/
+│ ├── dto/
+│ └── service/
+├── src/main/resources/
+│ ├── mybatis/mapper/
+│ ├── application.properties
+│ └── logback.xml
+└── src/main/webapp/WEB-INF/views/
+
+
 
 ---
 
-## 🛠 사용 기술 스택
+## ✅ Spring MVC 프로젝트 (spring2025)
 
-| 분류 | 기술 |
+### 💡 소개
+- 전통적인 Spring MVC 구조 기반
+- AOP, MyBatis, 로그 설정 등 포함
+
+### 🔧 주요 기술
+- Spring Framework 4.x
+- MyBatis
+- JSP
+- AOP (`@Aspect`)
+- Log4j / SLF4J
+- MySQL
+
+### 💻 실행 방법
+1. Eclipse에서 Maven Project로 import
+2. `db.properties` 수정
+3. Tomcat 실행 후 `http://localhost:8080/projectName/` 접속
+
+---
+
+## ✅ Spring Boot 프로젝트 (project001)
+
+### 💡 소개
+- 최신 Spring Boot 기반 프로젝트
+- JSP 기반 View, MyBatis 매퍼 연동
+- Logback 로그 설정 포함
+
+### 🔧 주요 기술
+- Spring Boot
+- MyBatis
+- JSP
+- Logback / Log4jdbc
+- Maven
+- Embedded Tomcat
+
+### 📁 주요 기능
+
+| 기능 | 설명 |
 |------|------|
-| 프레임워크 | Spring 4.x, MyBatis |
-| 빌드 도구 | Maven |
-| 템플릿 | JSP (추정) |
-| AOP | Spring AOP (`@Aspect`) |
-| 로깅 | Log4j, SLF4J |
-| 데이터베이스 | MySQL 또는 JDBC 기반 |
-| 개발 도구 | Eclipse 또는 IntelliJ + Tomcat |
+| 로그인 | `AuthDao`, `auth-mapper.xml` |
+| 직원 조회 | `EmpDao`, `emp-mapper.xml` |
+| 테스트 응답 | `TestController` |
+| 뷰 렌더링 | `service.jsp` |
 
----
-
-## 🚀 실행 방법
-
-1. Eclipse에서 Maven Project로 Import
-2. `db.properties`에 DB 연결 정보 수정
-3. `Tomcat` 서버에 배포 및 실행
-4. 브라우저에서 `http://localhost:8080/projectName/` 접속
+### 💻 실행 방법
+1. IntelliJ 또는 Eclipse에서 import
+2. `application.properties` 내 DB 설정
+3. `Project001Application` 실행
+4. 접속: `http://localhost:8080/service`
 
 ---
 
 ## 🙋‍♀️ 작성자
 
 - GitHub: [joyulbi](https://github.com/joyulbi)
-- 프로젝트 목적: Spring 기반 웹 서비스 구조와 데이터 흐름의 실전 감각 익히기
+- 목표: 전통 MVC부터 최신 Boot 구조까지 단계별 실전 백엔드 흐름 학습
 
 ---
 
-## 📈 확장 계획 (예정)
+## 📈 향후 계획
 
-- 로그인/회원가입, 게시판 CRUD 기능 구현
-- 인터셉터 및 예외 처리 핸들러 추가
-- Ajax 및 REST API 연동 기능 추가
-- 테스트 자동화(JUnit), Spring Security, Spring Boot 전환 가능성 탐색
+- Spring Security 인증 추가
+- 게시판 CRUD + 로그인 + 세션 연동
+- REST API 버전화 + 프론트 분리 (Vue/React)
+- JUnit 기반 테스트 자동화
 
 ---
