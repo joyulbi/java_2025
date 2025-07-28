@@ -61,24 +61,24 @@
 
 ### ☕ 1. Java 기초 문법 실습
 - 객체지향, 변수/자료형, 연산자 등 핵심 개념 실습
-- ✔️ [바로가기]
+- ✔️ [바로가기][https://github.com/joyulbi/java_2025/blob/main/%EB%A9%94%EB%AA%A8/jsp_basic](https://github.com/joyulbi/java_2025/blob/main/%EB%A9%94%EB%AA%A8/java_basic)
 
 ---
 
 ### 🌐 2. JSP / Servlet 웹 개발 실습
 - MVC1, MVC2 패턴 기반 JSP + Servlet 구조 이해
-- ✔️ [바로가기]
+- ✔️ [바로가기]https://github.com/joyulbi/java_2025/blob/main/%EB%A9%94%EB%AA%A8/jsp_basic
 
 ---
 
 ### 🌱 3. Spring MVC + MyBatis 통합 구조 실습
 - Controller → Service → DAO 흐름, AOP/트랜잭션 기반 기능 구현
-- ✔️ [바로가기]
+- ✔️ [바로가기]https://github.com/joyulbi/java_2025/blob/main/%EB%A9%94%EB%AA%A8/spring2025
 ---
 
 ### 🚀 4. Spring Boot + MyBatis 기반 웹 앱 실습
 - Spring Boot 기반 통합 백엔드 환경 구성 및 MyBatis 매핑 처리
-- ✔️ [바로가기]
+- ✔️ [바로가기]https://github.com/joyulbi/java_2025/blob/main/%EB%A9%94%EB%AA%A8/SPRINGBOOT_%ED%95%84%EA%B8%B0.txt
 
 ---
 
